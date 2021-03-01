@@ -13,6 +13,7 @@ import com.aayush.resturant_management_system.RMS.adapter.FoodMenuAdapter
 import com.aayush.resturant_management_system.RMS.database.FoodMenuDatabase
 import com.aayush.resturant_management_system.RMS.entity.FoodMenu
 import com.aayush.resturant_management_system.RMS.repository.FoodMenuRepository
+import com.synnapps.carouselview.CarouselView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -22,13 +23,48 @@ import kotlinx.coroutines.withContext
 
 class HomeFragment : Fragment() {
     private lateinit var menurecycler: RecyclerView
+    private  lateinit var  carouselView : CarouselView
+
+    //Carousel
+    var sampleImage = intArrayOf(
+        R.drawable.logo,
+        R.drawable.backg,
+        R.drawable.logo
+    )
+    var title = arrayOf(
+        "food",
+        "ffof",
+        "MOMo"
+    )
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_home, container, false)
 
+
+
+
+
+
+        val view = inflater.inflate(R.layout.fragment_home, container, false)
+        carouselView = view.findViewById(R.id.carouselView)
         menurecycler=view.findViewById(R.id.menurecycler)
 
+
+        //carouselView
+//        setContentView(R.layout.fragment_home)
+
+        carouselView.pageCount = title.size
+        carouselView.setImageClickListener { position ->
+
+            Toast.makeText(context, title[position] , Toast.LENGTH_SHORT).show()
+        }
+
+        carouselView.setImageListener { position, imageView ->
+            imageView.setImageResource(sampleImage[position])
+
+        }
+        
+        
         getData()
         return view;
     }
