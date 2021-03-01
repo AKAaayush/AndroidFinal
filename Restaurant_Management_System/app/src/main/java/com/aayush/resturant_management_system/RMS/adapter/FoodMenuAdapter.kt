@@ -36,7 +36,7 @@ class FoodMenuAdapter (
 
 
                 val imagePath = ServiceBuilder.loadImagepath() + foodMenu.menu_image
-                if (!foodMenu.menu_image.equals("no-photo.jpg")) {
+                if (!foodMenu.menu_image.equals("no-photo.png")) {
                     Glide.with(mContext)
                         .load(imagePath)
                         .fitCenter()
