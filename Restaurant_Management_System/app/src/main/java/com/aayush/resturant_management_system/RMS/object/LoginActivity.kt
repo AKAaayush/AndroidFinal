@@ -9,7 +9,7 @@ import android.widget.*
 import androidx.core.app.ActivityCompat
 import com.aayush.resturant_management_system.R
 import com.aayush.resturant_management_system.RMS.api.ServiceBuilder
-import com.aayush.resturant_management_system.RMS.model.User
+import com.aayush.resturant_management_system.RMS.entity.User
 import com.aayush.resturant_management_system.RMS.repository.UserRepository
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.CoroutineScope
@@ -85,7 +85,7 @@ class LoginActivity : AppCompatActivity() {
         val email = login_email.text.toString()
         val password = login_password.text.toString()
         Toast.makeText(this, "${email + password}", Toast.LENGTH_SHORT).show()
-        val user=User(email=email,password = password)
+        val user= User(email=email,password = password)
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val repository = UserRepository()

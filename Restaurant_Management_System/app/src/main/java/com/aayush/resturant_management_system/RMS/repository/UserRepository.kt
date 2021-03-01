@@ -3,7 +3,8 @@ package com.aayush.resturant_management_system.RMS.repository
 import com.aayush.resturant_management_system.RMS.api.ApiRequest
 import com.aayush.resturant_management_system.RMS.api.ServiceBuilder
 import com.aayush.resturant_management_system.RMS.api.UserApi
-import com.aayush.resturant_management_system.RMS.model.User
+import com.aayush.resturant_management_system.RMS.entity.User
+
 import com.aayush.resturant_management_system.RMS.response.LoginResponse
 import com.aayush.resturant_management_system.RMS.response.RegisterResponse
 

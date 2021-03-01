@@ -23,4 +23,11 @@ object ServiceBuilder {
     fun <T> buildServices(serviceType: Class<T>):T{
         return retrofit.create(serviceType)
     }
+
+
+    //Path to load image
+    fun loadImagepath(): String{
+        val arr = BASE_URL.split("/").toTypedArray()
+        return arr[0] + "/" + arr[1] + arr[2] + "/images/"
+    }
 }

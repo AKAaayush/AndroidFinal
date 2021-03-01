@@ -9,7 +9,8 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import com.aayush.resturant_management_system.R
-import com.aayush.resturant_management_system.RMS.model.User
+import com.aayush.resturant_management_system.RMS.entity.User
+
 import com.aayush.resturant_management_system.RMS.repository.UserRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

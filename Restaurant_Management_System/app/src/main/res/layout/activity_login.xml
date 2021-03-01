@@ -32,7 +32,7 @@ android:orientation="vertical"
             android:id="@+id/imageView"
             android:layout_width="344dp"
             android:layout_height="197dp"
-            android:src="@drawable/logo"
+            android:src="@drawable/logo_2"
             android:transitionName="logo"
             tools:layout_editor_absoluteX="33dp"
             tools:layout_editor_absoluteY="16dp"
@@ -99,6 +99,7 @@ android:orientation="vertical"
             tools:layout_editor_absoluteY="577dp" />
 
         <Button
+            android:gravity="center"
             android:id="@+id/btn_signup"
             style="@style/Widget.AppCompat.Button.Borderless.Colored"
             android:layout_width="92dp"

@@ -25,11 +25,11 @@ class SliderActivity : AppCompatActivity() {
             listOf(
                     IntroSlide("Restaurant Management System",
                             "Restaurant Management System",
-                            R.drawable.logo),
+                            R.drawable.logo_2),
 
                     IntroSlide("Restaurant Management System",
                             "Restaurant Management System",
-                            R.drawable.logo)
+                            R.drawable.logo_2)
             )
     )
     override fun onCreate(savedInstanceState: Bundle?) {

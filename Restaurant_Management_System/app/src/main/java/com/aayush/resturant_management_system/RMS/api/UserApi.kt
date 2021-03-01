@@ -1,6 +1,7 @@
 package com.aayush.resturant_management_system.RMS.api
 
-import com.aayush.resturant_management_system.RMS.model.User
+
+import com.aayush.resturant_management_system.RMS.entity.User
 import com.aayush.resturant_management_system.RMS.response.LoginResponse
 import com.aayush.resturant_management_system.RMS.response.RegisterResponse
 import retrofit2.Response
