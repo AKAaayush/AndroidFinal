@@ -7,8 +7,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1b97d3b5-b1d8-4c74-a498-64c2530402e0" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Restaurant_Management_System/app/src/main/java/com/aayush/resturant_management_system/RMS/dao/FoodMemuDAO.kt" beforeDir="false" afterPath="$PROJECT_DIR$/Restaurant_Management_System/app/src/main/java/com/aayush/resturant_management_system/RMS/dao/FoodMemuDAO.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Restaurant_Management_System/app/src/androidTest/java/com/aayush/resturant_management_system/UserLoginTesting.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Restaurant_Management_System/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/Restaurant_Management_System/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Restaurant_Management_System/app/src/main/res/layout/fragment_home.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Restaurant_Management_System/app/src/main/res/layout/fragment_home.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
