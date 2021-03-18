@@ -66,6 +66,48 @@
             app:layout_constraintTop_toBottomOf="@+id/signup_fullname" />
 
         <EditText
+            android:id="@+id/signup_phone"
+            android:layout_width="327dp"
+            android:layout_height="75dp"
+            android:layout_marginTop="40dp"
+            android:backgroundTint="@color/gray"
+            android:drawableLeft="@drawable/profile_icon"
+            android:drawablePadding="20dp"
+            android:drawableTint="@color/gray"
+            android:ems="10"
+            android:hint="Phone"
+            android:inputType="textPersonName"
+            android:textColor="@color/black"
+            android:textColorHighlight="@color/colorAccent"
+            android:textColorHint="@color/cardview_dark_background"
+            android:textColorLink="@color/colorAccent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.559"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/signup_address" />
+
+        <EditText
+            android:id="@+id/signup_gender"
+            android:layout_width="327dp"
+            android:layout_height="75dp"
+            android:layout_marginTop="40dp"
+            android:backgroundTint="@color/gray"
+            android:drawableLeft="@drawable/profile_icon"
+            android:drawablePadding="20dp"
+            android:drawableTint="@color/gray"
+            android:ems="10"
+            android:hint="gender"
+            android:inputType="textPersonName"
+            android:textColor="@color/black"
+            android:textColorHighlight="@color/colorAccent"
+            android:textColorHint="@color/cardview_dark_background"
+            android:textColorLink="@color/colorAccent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.559"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/signup_phone" />
+
+        <EditText
             android:id="@+id/signup_email"
             android:layout_width="327dp"
             android:layout_height="75dp"
@@ -83,7 +125,7 @@
             android:textColorLink="@color/colorAccent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/signup_address" />
+            app:layout_constraintTop_toBottomOf="@+id/signup_gender" />
 
         <EditText
             android:id="@+id/signup_password"
@@ -125,11 +167,33 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/signup_email" />
 
+<!--        //calender-->
+
+        <Button
+            android:id="@+id/clndbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pick Date"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_signup"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/dateTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Date"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/clndbtn"
+            tools:ignore="MissingConstraints" />
+
         <Button
             android:id="@+id/btn_signup"
             android:layout_width="322dp"
             android:layout_height="40dp"
-            android:layout_marginTop="56dp"
+            android:layout_marginTop="44dp"
             android:backgroundTint="@color/gray"
             android:text="Sign-Up"
             android:textColor="@color/white"
@@ -167,6 +231,8 @@
             app:layout_constraintHorizontal_bias="0.492"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
+
+
 
 
 
