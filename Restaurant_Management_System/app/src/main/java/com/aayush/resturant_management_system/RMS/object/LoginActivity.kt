@@ -81,6 +81,49 @@ class LoginActivity : AppCompatActivity() {
         ActivityCompat.requestPermissions(this@LoginActivity, permissions, 1)
     }
 
+//    private fun login() {
+//        val email = login_email.text.toString()
+//        val password = login_password.text.toString()
+//        Toast.makeText(this, "${email + password}", Toast.LENGTH_SHORT).show()
+//        val user= User(email=email,password = password)
+//        CoroutineScope(Dispatchers.IO).launch {
+//            try {
+//                val repository = UserRepository()
+//                val response = repository.checkUser(user)
+//                if (response.success == true) {
+//                    ServiceBuilder.token = "Bearer " + response.token
+//                    startActivity(
+//                            Intent(
+//                                    this@LoginActivity,
+//                                    MainActivity::class.java
+//                            )
+//                    )
+//                    finish()
+//                } else {
+//                    withContext(Dispatchers.Main) {
+//                        val snack =
+//                                Snackbar.make(
+//                                        linearlayout,
+//                                        "Invalid credentials",
+//                                        Snackbar.LENGTH_LONG
+//                                )
+//                        snack.setAction("OK", View.OnClickListener {
+//                            snack.dismiss()
+//                        })
+//                        snack.show()
+//                    }
+//                }
+//            } catch (ex: Exception) {
+//                withContext(Dispatchers.Main) {
+//                    Toast.makeText(
+//                            this@LoginActivity,
+//                            "login error", Toast.LENGTH_SHORT
+//                    ).show()
+//                }
+//            }
+//        }
+//    }
+
     private fun login() {
         val email = login_email.text.toString()
         val password = login_password.text.toString()
@@ -89,7 +132,7 @@ class LoginActivity : AppCompatActivity() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val repository = UserRepository()
-                val response = repository.checkUser(user)
+                val response = repository.checkUser(user = user)
                 if (response.success == true) {
                     ServiceBuilder.token = "Bearer " + response.token
                     startActivity(
@@ -113,11 +156,12 @@ class LoginActivity : AppCompatActivity() {
                         snack.show()
                     }
                 }
+
             } catch (ex: Exception) {
                 withContext(Dispatchers.Main) {
                     Toast.makeText(
                             this@LoginActivity,
-                            "login error", Toast.LENGTH_SHORT
+                            "Login error", Toast.LENGTH_SHORT
                     ).show()
                 }
             }

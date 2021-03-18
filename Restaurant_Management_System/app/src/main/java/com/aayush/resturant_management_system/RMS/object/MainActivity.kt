@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.aayush.resturant_management_system.R
 import com.aayush.resturant_management_system.RMS.fragments.HomeFragment
+import com.aayush.resturant_management_system.RMS.fragments.MenuFragment
 import com.aayush.resturant_management_system.RMS.fragments.ProfileFragment
 import com.aayush.resturant_management_system.RMS.fragments.TableFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -29,6 +30,7 @@ class MainActivity : AppCompatActivity() {
         val homeFragment = HomeFragment()
         val tableFragment = TableFragment()
         val profileFragment = ProfileFragment()
+        val menuFragment = MenuFragment()
 
         drawer=findViewById(R.id.drawer_layout);
 
@@ -48,11 +50,14 @@ class MainActivity : AppCompatActivity() {
         bottomNav.setOnNavigationItemSelectedListener{item ->
             when(item.itemId){
                 R.id.Home -> {makeCurrentFragment(homeFragment)
-                true
+                    true
                 }R.id.Profile ->{makeCurrentFragment(profileFragment)
                 true
             }
                 R.id.Table ->{makeCurrentFragment(tableFragment)
+                    true
+                }
+                R.id.Menu ->{makeCurrentFragment(menuFragment)
                     true
                 }
 

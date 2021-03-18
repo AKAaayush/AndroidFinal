@@ -50,7 +50,7 @@ class FoodMenuAdapter (
         }
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeViewholder {
             val view= LayoutInflater.from(parent.context)
-                .inflate(R.layout.foodmenulayout, parent, false)
+                .inflate(R.layout.test, parent, false)
             return HomeViewholder(view)
         }
 
