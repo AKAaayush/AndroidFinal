@@ -52,18 +52,26 @@
     <!--        app:layout_constraintTop_toBottomOf="@+id/carouselView"-->
     <!--        app:layout_constraintVertical_bias="0.0"-->
     <!--        tools:ignore="MissingConstraints" />-->
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/fooditemrecycler"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
-        android:layout_marginTop="12dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
+        android:orientation="vertical"
         app:layout_constraintTop_toBottomOf="@+id/carouselView"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="-16dp">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/fooditemrecycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/carouselView"
+            tools:ignore="MissingConstraints" />
+    </ScrollView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
