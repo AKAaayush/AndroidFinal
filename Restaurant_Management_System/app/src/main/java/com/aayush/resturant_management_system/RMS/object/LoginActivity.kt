@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.*
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.app.ActivityCompat
 import com.aayush.resturant_management_system.R
 import com.aayush.resturant_management_system.RMS.api.ServiceBuilder
@@ -23,7 +25,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var login_password: EditText
     private lateinit var btn_login: Button
     private lateinit var btnsignup: Button
-    private lateinit var linearlayout: LinearLayout
+    private lateinit var linearlayout: ConstraintLayout
 
     private val permissions = arrayOf(
             android.Manifest.permission.CAMERA,
@@ -84,12 +86,12 @@ class LoginActivity : AppCompatActivity() {
     private fun login() {
         val email = login_email.text.toString()
         val password = login_password.text.toString()
-        Toast.makeText(this, "${email + password}", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "$email Logged In!! ", Toast.LENGTH_LONG).show()
         val user= User(email=email,password = password)
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val repository = UserRepository()
-                val response = repository.checkUser(user)
+                val response = repository.checkUser(user = user)
                 if (response.success == true) {
                     ServiceBuilder.token = "Bearer " + response.token
                     startActivity(
@@ -113,11 +115,12 @@ class LoginActivity : AppCompatActivity() {
                         snack.show()
                     }
                 }
+
             } catch (ex: Exception) {
                 withContext(Dispatchers.Main) {
                     Toast.makeText(
                             this@LoginActivity,
-                            "login error", Toast.LENGTH_SHORT
+                            "Login error", Toast.LENGTH_SHORT
                     ).show()
                 }
             }

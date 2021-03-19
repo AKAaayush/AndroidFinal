@@ -10,12 +10,6 @@ interface FoodMenuDAO {
    @Query("Delete from FoodMenu")
     suspend fun deleteFoodMenu()
 
-
-
-
-
-
-
     @Insert
     suspend fun insertfoodmenu(foodmenu: MutableList<FoodMenu>?)
 }

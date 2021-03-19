@@ -9,9 +9,13 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.aayush.resturant_management_system.R
+import com.aayush.resturant_management_system.RMS.adapter.FoodItemAdapter
 import com.aayush.resturant_management_system.RMS.adapter.FoodMenuAdapter
+import com.aayush.resturant_management_system.RMS.database.FoodItemDatabase
 import com.aayush.resturant_management_system.RMS.database.FoodMenuDatabase
+import com.aayush.resturant_management_system.RMS.entity.FoodItem
 import com.aayush.resturant_management_system.RMS.entity.FoodMenu
+import com.aayush.resturant_management_system.RMS.repository.FoodItemRepository
 import com.aayush.resturant_management_system.RMS.repository.FoodMenuRepository
 import com.synnapps.carouselview.CarouselView
 import kotlinx.coroutines.CoroutineScope
@@ -22,37 +26,31 @@ import kotlinx.coroutines.withContext
 
 
 class HomeFragment : Fragment() {
-    private lateinit var menurecycler: RecyclerView
+//    private lateinit var menurecycler: RecyclerView
+    private lateinit var fooditemrecycler: RecyclerView
     private  lateinit var  carouselView : CarouselView
 
     //Carousel
     var sampleImage = intArrayOf(
-        R.drawable.logo,
-        R.drawable.backg,
-        R.drawable.logo
+            R.drawable.logo,
+            R.drawable.backg,
+            R.drawable.logo
     )
     var title = arrayOf(
-        "food",
-        "ffof",
-        "MOMo"
+            "food",
+            "ffof",
+            "MOMo"
     )
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
-
-
-
-
-
         val view = inflater.inflate(R.layout.fragment_home, container, false)
         carouselView = view.findViewById(R.id.carouselView)
-        menurecycler=view.findViewById(R.id.menurecycler)
+        fooditemrecycler=view.findViewById(R.id.fooditemrecycler)
 
 
         //carouselView
-//        setContentView(R.layout.fragment_home)
-
         carouselView.pageCount = title.size
         carouselView.setImageClickListener { position ->
 
@@ -63,30 +61,30 @@ class HomeFragment : Fragment() {
             imageView.setImageResource(sampleImage[position])
 
         }
-        
-        
-        getData()
+
+//
+         getFoodData()
         return view;
     }
 
-    fun getData(){
+    fun getFoodData(){
         try{
             CoroutineScope(Dispatchers.IO).launch {
-                val foodMenuRepository = FoodMenuRepository()
-                val response = foodMenuRepository.getFoodMenuApiData()
+                val foodItemRepository = FoodItemRepository()
+                val response = foodItemRepository.getFoodItemApiData()
                 if(response.success==true){
                     withContext(Dispatchers.Main){
                         println(response)
-                        val foodmenuitemlist = response.data
-                        FoodMenuDatabase.getInstance(requireContext()).getFoodMenuDAO().deleteFoodMenu()
-                        FoodMenuDatabase.getInstance(requireContext()).getFoodMenuDAO().insertfoodmenu(response.data)
-                        Toast.makeText(context, "$foodmenuitemlist", Toast.LENGTH_SHORT).show()
-                        val adapter = FoodMenuAdapter(
-                                foodmenuitemlist as ArrayList<FoodMenu>,
+                        val fooditemlist = response.data
+                        FoodItemDatabase.getInstance(requireContext()).getFoodItemDAO().deleteFoodItem()
+                        FoodItemDatabase.getInstance(requireContext()).getFoodItemDAO().insertfoodItem(response.data)
+                        Toast.makeText(context, "$fooditemlist", Toast.LENGTH_SHORT).show()
+                        val adapter = FoodItemAdapter(
+                                fooditemlist as ArrayList<FoodItem>,
                                 requireContext()
                         )
-                        menurecycler.layoutManager = LinearLayoutManager(context)
-                        menurecycler.adapter = adapter
+                        fooditemrecycler.layoutManager = LinearLayoutManager(context)
+                        fooditemrecycler.adapter = adapter
                     }
                 }
             }
@@ -99,5 +97,3 @@ class HomeFragment : Fragment() {
 
     }
 }
-
-
