@@ -1,11 +1,10 @@
 package com.aayush.resturant_management_system.RMS.response
 
-import com.aayush.resturant_management_system.RMS.entity.User
+import com.aayush.resturant_management_system.RMS.entity.AddCart
 
-data class LoginResponse (
+class ForAddItemRespomse (
     val success:Boolean?=null,
-    val token:String?=null,
     val msg:String?=null,
-    val data: User?=null,
+    val data:List<AddCart>?=null,
     val id:String?=null
 )

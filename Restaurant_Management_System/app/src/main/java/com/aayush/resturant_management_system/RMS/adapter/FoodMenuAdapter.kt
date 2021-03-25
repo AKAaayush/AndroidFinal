@@ -22,7 +22,7 @@ class FoodMenuAdapter (
 
             fun bind(foodMenu:FoodMenu, index: Int) {
                 val menuname = view.findViewById<TextView>(R.id.mname)
-                val mtitle = view.findViewById<TextView>(R.id.mtitle)
+//                val mtitle = view.findViewById<TextView>(R.id.mtitle)
                 val fooddesc = view.findViewById<TextView>(R.id.fooddesc)
                 val foodprice = view.findViewById<TextView>(R.id.foodprice)
                 val imageView = view.findViewById<ImageView>(R.id.imageView)
@@ -30,7 +30,7 @@ class FoodMenuAdapter (
 //
                 val _id=foodMenu._id
                 menuname.text = foodMenu.menu_name
-                mtitle.text = foodMenu.menu_title
+//                mtitle.text = foodMenu.menu_title
                 fooddesc.text = foodMenu.menu_desc
                 foodprice.text = foodMenu.menu_price
 

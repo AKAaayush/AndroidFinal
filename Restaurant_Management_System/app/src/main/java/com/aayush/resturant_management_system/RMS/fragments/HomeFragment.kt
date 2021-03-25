@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.HorizontalScrollView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -32,14 +33,14 @@ class HomeFragment : Fragment() {
 
     //Carousel
     var sampleImage = intArrayOf(
-            R.drawable.logo,
-            R.drawable.backg,
-            R.drawable.logo
+            R.drawable.food,
+            R.drawable.food1,
+            R.drawable.food2
     )
     var title = arrayOf(
-            "food",
-            "ffof",
-            "MOMo"
+            "Food",
+            "Food",
+            "Food"
     )
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -72,18 +73,19 @@ class HomeFragment : Fragment() {
             CoroutineScope(Dispatchers.IO).launch {
                 val foodItemRepository = FoodItemRepository()
                 val response = foodItemRepository.getFoodItemApiData()
+                println(response)
                 if(response.success==true){
                     withContext(Dispatchers.Main){
                         println(response)
                         val fooditemlist = response.data
                         FoodItemDatabase.getInstance(requireContext()).getFoodItemDAO().deleteFoodItem()
                         FoodItemDatabase.getInstance(requireContext()).getFoodItemDAO().insertfoodItem(response.data)
-                        Toast.makeText(context, "$fooditemlist", Toast.LENGTH_SHORT).show()
+//                        Toast.makeText(context, "$fooditemlist", Toast.LENGTH_SHORT).show()
                         val adapter = FoodItemAdapter(
                                 fooditemlist as ArrayList<FoodItem>,
                                 requireContext()
                         )
-                        fooditemrecycler.layoutManager = LinearLayoutManager(context)
+                        fooditemrecycler.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
                         fooditemrecycler.adapter = adapter
                     }
                 }

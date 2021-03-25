@@ -24,11 +24,11 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var signup_password: EditText
     private lateinit var signup_cfpassword: EditText
     private lateinit var signup_phone: EditText
-    private lateinit var signup_gender: EditText
+//    private lateinit var signup_gender: EditText
     private lateinit var btn_signup: Button
     private lateinit var  btn_signin : Button
-    private lateinit var  clndbtn : Button
-    private lateinit var  dateTv : TextView
+//    private lateinit var  clndbtn : Button
+//    private lateinit var  dateTv : TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,30 +40,31 @@ class RegisterActivity : AppCompatActivity() {
         btn_signup = findViewById(R.id.btn_signup)
         signup_cfpassword = findViewById(R.id.signup_cfpassword)
         btn_signin = findViewById(R.id.btn_signin)
-        clndbtn = findViewById(R.id.clndbtn)
-        dateTv = findViewById(R.id.dateTv)
+//        clndbtn = findViewById(R.id.clndbtn)
+//        dateTv = findViewById(R.id.dateTv)
         signup_phone = findViewById(R.id.signup_phone)
-        signup_gender = findViewById(R.id.signup_gender)
+//        signup_gender = findViewById(R.id.signup_gender)
 
 //        textView2 = findViewById(R.id.textView2)
         //calender
-        val c = Calendar.getInstance()
-        val year = c.get(Calendar.YEAR)
-        val month = c.get(Calendar.MONTH)
-        val day = c.get(Calendar.DAY_OF_MONTH)
-        clndbtn.setOnClickListener(){
-            val dpd = DatePickerDialog(this, DatePickerDialog.OnDateSetListener{view,mYear,mMonth, mDay ->
-                //set to textview
-                dateTv.setText(""+mDay + "/" + mMonth + "/" + mYear)},
-                    year,month,day
-                )
-            //shoe dialog
-            dpd.show()
-
-        }
+//        val c = Calendar.getInstance()
+//        val year = c.get(Calendar.YEAR)
+//        val month = c.get(Calendar.MONTH)
+//     val day = c.get(Calendar.DAY_OF_MONTH)
+//        clndbtn.setOnClickListener(){
+//            val dpd = DatePickerDialog(this, DatePickerDialog.OnDateSetListener{view,mYear,mMonth, mDay ->
+//                //set to textview
+//                dateTv.setText(""+mDay + "/" + mMonth + "/" + mYear)},
+//                    year,month,day
+//                )
+//            //shoe dialog
+//            dpd.show()
+//
+//        }
 
         //api
         btn_signup.setOnClickListener(){
+
             signupwithApi()
         }
 
@@ -78,13 +79,13 @@ class RegisterActivity : AppCompatActivity() {
     val fullname=signup_fullname.text.toString()
     val address = signup_address.text.toString()
     val email=signup_email.text.toString()
-    val dob = dateTv.text.toString()
+//    val dob = dateTv.text.toString()
     val phone = signup_phone.text.toString()
-    val gender = signup_gender.text.toString()
+//    val gender = signup_gender.text.toString()
     val password=signup_password.text.toString()
     val cfpassword=signup_cfpassword.text.toString()
     if(password==cfpassword){
-        val user = User(name=fullname, email = email, address = address,dob = dob, phone = phone, gender = gender, password = password )
+        val user = User(name=fullname, email = email, address = address, phone = phone, password = password )
         CoroutineScope(Dispatchers.IO).launch {
             val repository= UserRepository()
             val response= repository.registerUSer(user)
@@ -114,7 +115,7 @@ class RegisterActivity : AppCompatActivity() {
         signup_address.setText("")
         signup_password.setText("")
         signup_phone.setText("")
-        signup_gender.setText("")
+//        signup_gender.setText("")
         signup_cfpassword.setText("")
     }
 

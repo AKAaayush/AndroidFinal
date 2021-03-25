@@ -12,36 +12,30 @@ import com.aayush.resturant_management_system.RMS.entity.ForAddItem
 import com.aayush.resturant_management_system.RMS.entity.User
 
 @Database(
-        entities =[(User::class), (FoodItem::class),(ForAddItem::class)],
-        version = 1,
-
+    entities = [(User::class), (FoodItem::class),(ForAddItem::class)],
+    version = 1,
     exportSchema = false
-
 )
-
-abstract class
-FoodItemDatabase : RoomDatabase() {
-    abstract fun getUserDAO(): UserDAO
+abstract class Db: RoomDatabase() {
+    abstract fun getUserDao(): UserDAO
     abstract fun getFoodItemDAO(): FoodItemDAO
     abstract fun getAddToCartDAO(): AddtoCartDAO
-
     companion object{
         @Volatile
-        private var instance:FoodItemDatabase?= null
-        fun getInstance(context: Context):FoodItemDatabase{
+        private var instance:Db?=null
+        fun getInstance(context: Context):Db{
             if(instance==null){
-                synchronized(FoodItemDatabase::class){
-                    instance=buildDatabase(context)
+                synchronized(Db::class){
+                    instance=builderDatabase(context)
                 }
             }
             return instance!!
         }
 
-        private fun buildDatabase(context: Context)=
-                Room.databaseBuilder(
-                        context.applicationContext,
-                        FoodItemDatabase::class.java,
-                        "FoodItemDB"
-                ).build()
+        private fun builderDatabase(context: Context)= Room.databaseBuilder(
+            context.applicationContext,
+            Db::class.java,
+            "UserDatabse"
+        ).build()
     }
 }

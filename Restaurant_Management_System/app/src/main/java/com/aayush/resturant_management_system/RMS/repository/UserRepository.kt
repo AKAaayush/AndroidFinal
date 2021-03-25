@@ -22,4 +22,10 @@ class UserRepository: ApiRequest() {
             myApi.checkUser(user)
         }
     }
+
+    suspend fun getUser( id:String): LoginResponse{
+        return apiRequest {
+            myApi.viewUser(ServiceBuilder.token!!,id)
+        }
+    }
 }

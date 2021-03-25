@@ -2,33 +2,34 @@ package com.aayush.resturant_management_system.RMS.`object`
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.aayush.resturant_management_system.R
-import com.aayush.resturant_management_system.RMS.fragments.HomeFragment
-import com.aayush.resturant_management_system.RMS.fragments.MenuFragment
-import com.aayush.resturant_management_system.RMS.fragments.ProfileFragment
-import com.aayush.resturant_management_system.RMS.fragments.TableFragment
+import com.aayush.resturant_management_system.RMS.api.ServiceBuilder
+import com.aayush.resturant_management_system.RMS.fragments.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
 
     lateinit var linear: LinearLayout
-    private lateinit var toolbar: Toolbar
+//    private lateinit var toolbar: Toolbar
     private lateinit var drawer: DrawerLayout
     lateinit var toggleAction: ActionBarDrawerToggle
     private lateinit var bottomNav: BottomNavigationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+Log.d("Toke is ",ServiceBuilder.token)
         setContentView(R.layout.activity_main)
 
         val homeFragment = HomeFragment()
-        val tableFragment = TableFragment()
+        val tableFragment = AddToCartFragment()
         val profileFragment = ProfileFragment()
         val menuFragment = MenuFragment()
 
@@ -39,8 +40,8 @@ class MainActivity : AppCompatActivity() {
         toggleAction.syncState()
 
         linear =findViewById(R.id.linear)
-        toolbar=findViewById(R.id.toolbar)
-        setSupportActionBar(toolbar)
+//        toolbar=findViewById(R.id.toolbar)
+//        setSupportActionBar(toolbar)
 
         //fragment Activities
         makeCurrentFragment(homeFragment)

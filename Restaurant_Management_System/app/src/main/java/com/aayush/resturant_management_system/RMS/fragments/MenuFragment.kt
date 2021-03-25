@@ -44,7 +44,7 @@ class MenuFragment : Fragment() {
                         val foodmenuitemlist = response.data
                         FoodMenuDatabase.getInstance(requireContext()).getFoodMenuDAO().deleteFoodMenu()
                         FoodMenuDatabase.getInstance(requireContext()).getFoodMenuDAO().insertfoodmenu(response.data)
-                        Toast.makeText(context, "$foodmenuitemlist", Toast.LENGTH_SHORT).show()
+//                        Toast.makeText(context, "$foodmenuitemlist", Toast.LENGTH_SHORT).show()
                         val adapter = FoodMenuAdapter(
                                 foodmenuitemlist as ArrayList<FoodMenu>,
                                 requireContext()
