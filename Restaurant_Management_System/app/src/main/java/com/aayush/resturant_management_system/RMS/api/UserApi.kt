@@ -5,10 +5,7 @@ import com.aayush.resturant_management_system.RMS.entity.User
 import com.aayush.resturant_management_system.RMS.response.LoginResponse
 import com.aayush.resturant_management_system.RMS.response.RegisterResponse
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface UserApi {
 
@@ -20,5 +17,13 @@ interface UserApi {
     suspend fun checkUser(
       @Body user:User
     ): Response<LoginResponse>
+
+    @GET("user/display/{id}")
+    suspend fun viewUser(
+        @Header("Authorization") token: String,
+        @Path("id") id: String
+        // @Body user: User
+    ): Response<LoginResponse>
+
 
 }

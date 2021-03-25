@@ -94,6 +94,7 @@ class LoginActivity : AppCompatActivity() {
                 val response = repository.checkUser(user = user)
                 if (response.success == true) {
                     ServiceBuilder.token = "Bearer " + response.token
+                    ServiceBuilder.id=response.id!!
                     startActivity(
                             Intent(
                                     this@LoginActivity,
