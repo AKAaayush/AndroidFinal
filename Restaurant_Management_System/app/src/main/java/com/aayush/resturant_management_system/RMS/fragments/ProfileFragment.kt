@@ -23,6 +23,8 @@ class ProfileFragment : Fragment() {
     //binding
     private  lateinit var  profile : TextView
     private lateinit var  profilename : TextView
+    private lateinit var  profile_name : TextView
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -30,6 +32,7 @@ class ProfileFragment : Fragment() {
 
         profile = view.findViewById(R.id.profile)
         profilename = view.findViewById(R.id.profilename)
+        profile_name = view.findViewById(R.id.profile_name)
         CoroutineScope(Dispatchers.IO).launch {
             try {
 
@@ -42,6 +45,8 @@ class ProfileFragment : Fragment() {
 
                     withContext(Dispatchers.Main) {
                         profilename.text = name
+                        profile_name.text = name
+
                     }
 
                 } else {

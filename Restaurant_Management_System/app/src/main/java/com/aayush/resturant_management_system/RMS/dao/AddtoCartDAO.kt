@@ -10,9 +10,9 @@ interface AddtoCartDAO {
     @Insert
     suspend fun AddCart(list:List<ForAddItem>?)
 
-    @Query("select * from foradditem")
+    @Query("select * from ForAddItem")
     suspend fun getCart(): List<ForAddItem>?
 
-    @Query("delete from foradditem")
+    @Query("delete from ForAddItem")
     suspend fun dropTable()
 }
