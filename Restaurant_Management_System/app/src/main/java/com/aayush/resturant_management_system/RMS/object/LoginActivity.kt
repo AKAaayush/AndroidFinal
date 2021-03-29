@@ -10,6 +10,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.app.ActivityCompat
 import com.aayush.resturant_management_system.R
+import com.aayush.resturant_management_system.RMS.Utils.saveSharedPref
 import com.aayush.resturant_management_system.RMS.api.ServiceBuilder
 import com.aayush.resturant_management_system.RMS.entity.User
 import com.aayush.resturant_management_system.RMS.repository.UserRepository
@@ -93,6 +94,7 @@ class LoginActivity : AppCompatActivity() {
                 val repository = UserRepository()
                 val response = repository.checkUser(user = user)
                 if (response.success == true) {
+                    saveSharedPref(_id = response.id!!, email = email, password =  password)
                     ServiceBuilder.token = "Bearer " + response.token
                     ServiceBuilder.id=response.id!!
                     startActivity(

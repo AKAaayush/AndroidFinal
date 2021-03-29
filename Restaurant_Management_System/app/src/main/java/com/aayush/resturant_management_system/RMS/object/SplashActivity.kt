@@ -8,11 +8,14 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import com.aayush.resturant_management_system.R
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import com.aayush.resturant_management_system.RMS.api.ServiceBuilder
+import com.aayush.resturant_management_system.RMS.entity.User
+import com.aayush.resturant_management_system.RMS.fragments.HomeFragment
+import com.aayush.resturant_management_system.RMS.fragments.ProfileFragment
+import com.aayush.resturant_management_system.RMS.repository.UserRepository
+import kotlinx.coroutines.*
 
 class SplashActivity : AppCompatActivity() {
 
@@ -28,16 +31,46 @@ class SplashActivity : AppCompatActivity() {
         window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
+        val sharedPref = getSharedPreferences("MyPref", AppCompatActivity.MODE_PRIVATE)
+        val emailPref = sharedPref.getString("email", null)
+        val passwordPref = sharedPref.getString("password", "")
         CoroutineScope(Dispatchers.Main).launch {
             delay(2500)
-            startActivity(
-                Intent(
-                    this@SplashActivity,
-                    SliderActivity::class.java
-                )
-            )
-            finish()
-        }
+
+            if (emailPref != null) {
+                withContext(Dispatchers.Main){
+                    Toast.makeText(this@SplashActivity, "$emailPref + ", Toast.LENGTH_SHORT).show()
+                    val repository = UserRepository()
+                    val user = User(email = emailPref, password = passwordPref)
+                    val response = repository.checkUser(user)
+                    if (response.success == true) {
+                        ServiceBuilder.token="Bearer ${response.token}"
+                        ServiceBuilder.id=response.id
+                        delay(500)
+                        startActivity(Intent(this@SplashActivity, MainActivity::class.java)
+                        )
+                        finish()
+                    }
+                }
+            }
+
+//            startActivity(
+//                Intent(
+//                    this@SplashActivity,
+//                    SliderActivity::class.java
+//                )
+//            )
+            else {
+                withContext(Dispatchers.Main){
+                    startActivity(
+                        Intent(
+                            this@SplashActivity,
+                            LoginActivity::class.java
+                        )
+                    )
+                }
+                finish()
+            }        }
 
         //splash
         topAnim =AnimationUtils.loadAnimation(this, R.anim.top_animation);
