@@ -13,5 +13,6 @@ data class User(
         val gender : String? =null,
         val phone : String? = null,
         val email: String? = null,
-        val password: String? = null
+        val password: String? = null,
+        val image: String? = null
 )
