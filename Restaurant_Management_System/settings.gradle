@@ -1,2 +1,3 @@
+include ':mywearos'
 include ':app'
 rootProject.name = "Restaurant_Management_System"
