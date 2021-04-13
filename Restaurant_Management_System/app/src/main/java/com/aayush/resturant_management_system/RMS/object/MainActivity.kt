@@ -33,7 +33,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         setContentView(R.layout.activity_main)
 
         val homeFragment = HomeFragment()
-        val tableFragment = AddToCartFragment()
+        val tableFragment = TableFragment()
+        val addToCartFragment = AddToCartFragment()
         val profileFragment = ProfileFragment()
         val menuFragment = MenuFragment()
         val mapsFragment = MapsFragment()
@@ -63,6 +64,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     true
                 }
                 R.id.Menu ->{makeCurrentFragment(menuFragment)
+                    true
+                }
+                R.id.Fav ->{makeCurrentFragment(addToCartFragment)
                     true
                 }
 

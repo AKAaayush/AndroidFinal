@@ -1,21 +1,15 @@
 package com.aayush.resturant_management_system.RMS.fragments
 
-import android.content.Intent
 import android.os.Bundle
-import android.text.TextUtils.replace
-import android.text.method.TextKeyListener.clear
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.fragment.app.FragmentTransaction
+import androidx.fragment.app.Fragment
 import com.aayush.resturant_management_system.R
-import com.aayush.resturant_management_system.RMS.`object`.TableActivity
 import com.aayush.resturant_management_system.RMS.entity.Table
-import com.aayush.resturant_management_system.RMS.entity.User
 import com.aayush.resturant_management_system.RMS.repository.TableRepository
-import com.aayush.resturant_management_system.RMS.repository.UserRepository
+import com.google.android.material.datepicker.MaterialDatePicker.Builder.datePicker
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -66,6 +60,16 @@ class TableFragment : Fragment() {
         time = view.findViewById(R.id.time)
         people = view.findViewById(R.id.people)
         date = view.findViewById(R.id.date)
+//        val day: Int = date.getDayOfMonth()
+//        val month: Int = date.getMonth() + 1
+//        val year: Int = date.getYear()
+        //For Data of birth
+//        date = view.findViewById<DatePicker>(R.id.date)
+//        val c = Calendar.getInstance()
+//        c[2000, 11] = 31 //Year,Mounth -1,Day
+//
+//        date.setMaxDate(c.timeInMillis)
+
         btn_table.setOnClickListener() {
             tablebooking()
 
