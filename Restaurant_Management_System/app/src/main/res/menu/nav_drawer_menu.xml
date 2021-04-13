@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item
-        android:id="@+id/miItem1"
-        android:title="Item 1"/>
-
-    <item
-        android:id="@+id/miItem2"
-        android:title="Item 2"/>
-
-    <item
-        android:id="@+id/miItem3"
-        android:title="Item 3"/>
+    <item android:id="@+id/maps"
+        android:icon="@drawable/public_icon"
+        android:title="Location"/>
+    <item android:id="@+id/bmi"
+        android:icon="@drawable/profile_icon"
+        android:title="Profile"/>
+    <item android:id="@+id/table"
+        android:icon="@drawable/search_icon"
+        android:title="Table"/>
+    <item android:id="@+id/settings"
+        android:icon="@drawable/search_icon"
+        android:title="Search"/>
 
 </menu>

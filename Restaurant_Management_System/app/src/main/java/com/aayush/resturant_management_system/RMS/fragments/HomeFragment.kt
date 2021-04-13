@@ -1,17 +1,27 @@
 package com.aayush.resturant_management_system.RMS.fragments
 
+import android.content.Intent
 import android.os.Bundle
+import android.text.TextUtils
+import android.text.TextUtils.replace
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.HorizontalScrollView
+import android.widget.ImageView
 import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.aayush.resturant_management_system.R
 import com.aayush.resturant_management_system.RMS.adapter.FoodItemAdapter
 import com.aayush.resturant_management_system.RMS.adapter.FoodMenuAdapter
+//import com.aayush.resturant_management_system.RMS.adapter.HomeAdapter
+import com.aayush.resturant_management_system.RMS.database.Db
 import com.aayush.resturant_management_system.RMS.database.FoodItemDatabase
 import com.aayush.resturant_management_system.RMS.database.FoodMenuDatabase
 import com.aayush.resturant_management_system.RMS.entity.FoodItem
@@ -29,7 +39,10 @@ import kotlinx.coroutines.withContext
 class HomeFragment : Fragment() {
 //    private lateinit var menurecycler: RecyclerView
     private lateinit var fooditemrecycler: RecyclerView
+//     private lateinit var favRecycle : RecyclerView
     private  lateinit var  carouselView : CarouselView
+    private  val  fragment= AddToCartFragment()
+    private lateinit var  cartbtn : ImageView
 
     //Carousel
     var sampleImage = intArrayOf(
@@ -49,6 +62,8 @@ class HomeFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
         carouselView = view.findViewById(R.id.carouselView)
         fooditemrecycler=view.findViewById(R.id.fooditemrecycler)
+            cartbtn=view.findViewById(R.id.cartbtn)
+//        favRecycle=view.findViewById(R.id.favRecycle)
 
 
         //carouselView
@@ -63,8 +78,17 @@ class HomeFragment : Fragment() {
 
         }
 
+        cartbtn.setOnClickListener {
+            loadFragment(fragment)
+        }
+
+
+
+
+
 //
-         getFoodData()
+        getFoodData()
+
         return view;
     }
 
@@ -85,6 +109,8 @@ class HomeFragment : Fragment() {
                                 fooditemlist as ArrayList<FoodItem>,
                                 requireContext()
                         )
+//                        val alllist= Db.getInstance(requireContext()).getFoodItemDAO().getproduct()
+//                        val adpater= context?.let { HomeAdapter(alllist as ArrayList<FoodItem>, it) }
                         fooditemrecycler.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
                         fooditemrecycler.adapter = adapter
                     }
@@ -98,4 +124,32 @@ class HomeFragment : Fragment() {
         }
 
     }
+
+    private fun loadFragment(fragment: Fragment){
+        val trans=fragmentManager?.beginTransaction()
+        trans?.replace(R.id.containerViewPager,fragment)
+        trans?.disallowAddToBackStack()
+        trans?.commit()
+    }
+
+
+
+//     fun loadvlaue(){
+//        CoroutineScope(Dispatchers.IO).launch{
+//            val repositrory=FoodItemRepository()
+//            val response=repositrory.getFoodItemApiData()
+//            if(response.success==true){
+//                val list=response.data
+//                Db.getInstance(requireContext()).getFoodItemDAO().dropTable()
+//                Db.getInstance(requireContext()).getFoodItemDAO().AddProdcut(list)
+//                val alllist=FoodItemDatabase.getInstance(requireContext()).getFoodItemDAO().getproduct()
+//                withContext(Dispatchers.Main){
+//                    val adpater= context?.let { HomeAdapter(alllist as ArrayList<FoodItem>, it) }
+//                    fooditemrecycler.setHasFixedSize(true);
+//                    fooditemrecycler.layoutManager =LinearLayoutManager(activity)
+//                    fooditemrecycler.adapter=adpater;
+//                }
+//            }
+//        }
+//    }
 }

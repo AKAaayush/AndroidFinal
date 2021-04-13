@@ -1,60 +1,120 @@
 package com.aayush.resturant_management_system.RMS.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.*
+import androidx.fragment.app.Fragment
 import com.aayush.resturant_management_system.R
+import com.aayush.resturant_management_system.RMS.entity.Table
+import com.aayush.resturant_management_system.RMS.repository.TableRepository
+import com.google.android.material.datepicker.MaterialDatePicker.Builder.datePicker
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [TableFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class TableFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+        private lateinit var user_email : EditText
+        private lateinit var people : EditText
+        private lateinit var date : DatePicker
+        private lateinit var time : Spinner
+        private lateinit var btn_table : Button
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+//
+//      fun onCreate(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
+//        super.onCreate(savedInstanceState)
+//        val view = inflater.inflate(R.layout.fragment_table, container, false)
+//
+//        user_email = view.findViewById(R.id.user_email)
+//        time = view.findViewById(R.id.time)
+//        people = view.findViewById(R.id.people)
+//        date = view.findViewById(R.id.date)
+//          btn_table = view.findViewById(R.id.btn_table)
+//
+//          btn_table.setOnClickListener(){
+////              Toast.makeText(context, "error Booked", Toast.LENGTH_SHORT).show()
+////
+////              tablebooking()
+//              startActivity(context, TableActivity::class.java))
+//          }
+//
+//        return view
+//    }
+
+//    override fun onCreate(inflater: LayoutInflater, container: ViewGroup?,
+//                          savedInstanceState: Bundle?): View?  {
+//
+//
+//
+//        return inflater.inflate(R.layout.fragment_table, container, false)
+//
+//    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        btn_table = view.findViewById(R.id.btn_table)
+        user_email = view.findViewById(R.id.user_email)
+        time = view.findViewById(R.id.time)
+        people = view.findViewById(R.id.people)
+        date = view.findViewById(R.id.date)
+//        val day: Int = date.getDayOfMonth()
+//        val month: Int = date.getMonth() + 1
+//        val year: Int = date.getYear()
+        //For Data of birth
+//        date = view.findViewById<DatePicker>(R.id.date)
+//        val c = Calendar.getInstance()
+//        c[2000, 11] = 31 //Year,Mounth -1,Day
+//
+//        date.setMaxDate(c.timeInMillis)
+
+        btn_table.setOnClickListener() {
+            tablebooking()
+
         }
+    }
+    private  fun tablebooking() {
+        val user_email = user_email.text.toString()
+        val people = people.text.toString()
+        val date = date.toString()
+        val time = time.toString()
+
+        val table = Table(user_email = user_email, people = people, date = date, time = time)
+        CoroutineScope(Dispatchers.IO).launch {
+            val repository = TableRepository()
+            val response = repository.registerTable(table)
+            if (response.success == true) {
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(context, "Table Booked", Toast.LENGTH_SHORT).show()
+                    clear()
+                }
+            } else {
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(context, "error Booked", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+        }
+
+
+
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_table, container, false)
+        val view = inflater.inflate(R.layout.fragment_table, container, false)
+
+        return view;
+    }
+    private fun clear() {
+        user_email.setText("")
+        people.setText("")
+
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment TableFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            TableFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
+
 }

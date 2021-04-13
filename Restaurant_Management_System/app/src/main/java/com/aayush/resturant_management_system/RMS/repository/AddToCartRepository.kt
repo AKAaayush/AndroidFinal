@@ -19,11 +19,11 @@ class AddToCartRepository : ApiRequest(){
             myApi.AddFavtheProduct(ServiceBuilder.token!!,addFav)
         }
     }
-    suspend fun getParticularNote():AddtoCartResponse{
-        return apiRequest {
-            myApi.getParticularFavPRoduct(ServiceBuilder.token!!,ServiceBuilder.id!!)
-        }
-    }
+//    suspend fun getParticularNote():AddtoCartResponse{
+//        return apiRequest {
+//            myApi.getParticularFavPRoduct(ServiceBuilder.token!!,ServiceBuilder.id!!)
+//        }
+//    }
     suspend fun deleteFavProduct(noteId:String):AddtoCartResponse{
         return apiRequest {
             myApi.deleteFavPRoduct(ServiceBuilder.token!!,noteId)

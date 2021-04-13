@@ -1,5 +1,6 @@
 package com.aayush.resturant_management_system.RMS.fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -27,7 +28,8 @@ class ProfileFragment : Fragment() {
     private  lateinit var  profile : TextView
     private lateinit var  profilename : TextView
 
-    private lateinit var  profile_name : TextView
+
+    private lateinit var  email : TextView
     private lateinit var  image : CircleImageView
 //    private lateinit var  welcome : TextView
 
@@ -39,10 +41,11 @@ class ProfileFragment : Fragment() {
 
         profile = view.findViewById(R.id.profile)
         profilename = view.findViewById(R.id.profilename)
-        profile_name = view.findViewById(R.id.profile_name)
+
+        email = view.findViewById(R.id.profile_email)
 //        welcome = view.findViewById(R.id.welcome)
 
-//        image = view.findViewById(R.id.circleImageView)
+        image = view.findViewById(R.id.circleImageView)
 
 
         CoroutineScope(Dispatchers.IO).launch {
@@ -53,11 +56,13 @@ class ProfileFragment : Fragment() {
                 if (response.success == true) {
                     val data = response.data
                     Log.d("Data is: ", response.data!!.toString())
-                    val name = "${data!!.name} "
+                    val name = "${data!!.name}  "
+                    val p_email = "${data!!.email}"
+
 
                     withContext(Dispatchers.Main) {
                         profilename.text = name
-                        profile_name.text = name
+                        email.text = p_email
 //                        welcome.text = name
 
 
@@ -85,6 +90,7 @@ class ProfileFragment : Fragment() {
         return view;
 
 //        profileview()
+
 
 
     }

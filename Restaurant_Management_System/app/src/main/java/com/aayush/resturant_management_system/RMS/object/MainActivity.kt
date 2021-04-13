@@ -17,7 +17,7 @@ import com.aayush.resturant_management_system.RMS.fragments.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     lateinit var  toggle: ActionBarDrawerToggle
     lateinit var linear: LinearLayout
     private lateinit var drawer: DrawerLayout
@@ -25,15 +25,19 @@ class MainActivity : AppCompatActivity() {
     private lateinit var bottomNav: BottomNavigationView
     private lateinit var nav_view: NavigationView
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d("Toke is ",ServiceBuilder.token)
         setContentView(R.layout.activity_main)
 
         val homeFragment = HomeFragment()
-        val tableFragment = AddToCartFragment()
+        val tableFragment = TableFragment()
+        val addToCartFragment = AddToCartFragment()
         val profileFragment = ProfileFragment()
         val menuFragment = MenuFragment()
+        val mapsFragment = MapsFragment()
 
         drawer=findViewById(R.id.drawer_layout);
         nav_view=findViewById(R.id.nav_view);
@@ -62,9 +66,23 @@ class MainActivity : AppCompatActivity() {
                 R.id.Menu ->{makeCurrentFragment(menuFragment)
                     true
                 }
+                R.id.Fav ->{makeCurrentFragment(addToCartFragment)
+                    true
+                }
 
                 else -> false
             }
+        }
+
+        //fragments from slider menu
+        nav_view.setNavigationItemSelectedListener(this)
+        nav_view.setNavigationItemSelectedListener {
+            when(it.itemId){
+                R.id.maps ->{makeCurrentFragment(mapsFragment)}
+            }
+
+
+            true
         }
 
         toggle = ActionBarDrawerToggle(this,drawer, R.string.open, R.string.close )
@@ -97,5 +115,12 @@ class MainActivity : AppCompatActivity() {
             setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
             commit()
         }
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        if(toggle.onOptionsItemSelected(item)){
+            return true;
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
