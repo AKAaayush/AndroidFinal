@@ -77,6 +77,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 R.id.maps ->{makeCurrentFragment(mapsFragment)}
             }
 
+
             true
         }
 

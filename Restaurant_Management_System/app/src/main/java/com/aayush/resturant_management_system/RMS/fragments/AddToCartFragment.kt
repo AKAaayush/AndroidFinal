@@ -81,20 +81,20 @@ class AddToCartFragment : Fragment() {
     private fun loadvlaue() {
         var listNotes: List<ForAddItem>?
         CoroutineScope(Dispatchers.IO).launch {
-            //-------- getting noteid---------------//
             val repository = AddToCartRepository()
             val response = repository.getallFavProdcut(ServiceBuilder.id!!)
             if (response.success == true) {
                 val data = response.data
                 var allnoteid: String? = null
                 //------drop table-----------//
-                Db.getInstance(requireContext()).getAddToCartDAO().dropTable()
+                FoodItemDatabase.getInstance(requireContext()).getAddToCartDAO().dropTable()
                 for (i in data!!.indices) {
                     allnoteid = data[i].productId
                     //----------getting note from noteid------------/////////
                     val noteRepository = FoodItemRepository()
                     val noteResponse = noteRepository.getallAddtoCart(allnoteid!!)
                     if (noteResponse.success == true) {
+                        val res=noteResponse.data
                         //--------insert into table-----------------//
                         FoodItemDatabase.getInstance(requireContext()).getAddToCartDAO().AddCart(noteResponse.data)
                         // listNotes=(noteResponse.data)

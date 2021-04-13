@@ -7,6 +7,9 @@
     <item android:id="@+id/bmi"
         android:icon="@drawable/profile_icon"
         android:title="Profile"/>
+    <item android:id="@+id/table"
+        android:icon="@drawable/search_icon"
+        android:title="Table"/>
     <item android:id="@+id/settings"
         android:icon="@drawable/search_icon"
         android:title="Search"/>
