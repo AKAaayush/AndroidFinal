@@ -20,7 +20,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Resturant_Management_System"
         android:usesCleartextTraffic="true">
-        <activity android:name=".RMS.object.FavActivity"></activity>
+        <activity android:name=".RMS.object.PocketActivity"></activity>
+        <activity android:name=".RMS.object.FavActivity" />
         <activity android:name=".RMS.object.TableActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.

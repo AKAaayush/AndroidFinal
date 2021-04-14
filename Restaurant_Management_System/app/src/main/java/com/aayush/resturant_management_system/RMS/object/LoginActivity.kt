@@ -2,6 +2,10 @@ package com.aayush.resturant_management_system.RMS.`object`
 
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -21,12 +25,15 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 
-class LoginActivity : AppCompatActivity() {
+class LoginActivity : AppCompatActivity(), SensorEventListener {
     private lateinit var login_email: EditText
     private lateinit var login_password: EditText
     private lateinit var btn_login: Button
     private lateinit var btnsignup: Button
     private lateinit var linearlayout: ConstraintLayout
+
+    private lateinit var sensorManager: SensorManager
+    private var sensor:Sensor?=null
 
     private val permissions = arrayOf(
             android.Manifest.permission.CAMERA,
@@ -44,6 +51,17 @@ class LoginActivity : AppCompatActivity() {
         btn_login = findViewById(R.id.btn_login)
         linearlayout = findViewById(R.id.linearlayout)
 
+
+
+        sensorManager= getSystemService(SENSOR_SERVICE) as SensorManager
+
+        if(!checkSensor())
+            return
+        else{
+            sensor= sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE)
+            sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL  )
+        }
+
         checkRunTimePermission()
         btn_login.setOnClickListener {
             login()
@@ -55,6 +73,24 @@ class LoginActivity : AppCompatActivity() {
             startActivity(Intent(this, RegisterActivity::class.java))
         }
 
+
+    }
+
+    private fun checkSensor(): Boolean {
+        var flag=true
+        if(sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE)==null){
+            flag= false
+        }
+        return flag
+    }
+
+    override fun onSensorChanged(event: SensorEvent?){
+        val values=event!!.values[1]
+        if (values<0)
+            startActivity(Intent(this, RegisterActivity::class.java))
+
+        else if (values>0)
+            Toast.makeText(this, "swap left", Toast.LENGTH_SHORT).show()
 
     }
 
@@ -129,4 +165,12 @@ class LoginActivity : AppCompatActivity() {
             }
         }
     }
+
+    override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
+
+    }
+
+
+
+
 }
