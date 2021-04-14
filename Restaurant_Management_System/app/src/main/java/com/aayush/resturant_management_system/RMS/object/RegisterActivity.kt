@@ -37,7 +37,7 @@ class RegisterActivity : AppCompatActivity() {
         signup_address = findViewById(R.id.signup_address)
         signup_email = findViewById(R.id.signup_email)
         signup_password = findViewById(R.id.signup_password)
-        btn_signup = findViewById(R.id.btn_signup)
+        btn_signup = findViewById(R.id.signup_btn)
         signup_cfpassword = findViewById(R.id.signup_cfpassword)
         btn_signin = findViewById(R.id.btn_signin)
 //        clndbtn = findViewById(R.id.clndbtn)

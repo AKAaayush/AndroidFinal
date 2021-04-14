@@ -89,8 +89,10 @@ class LoginActivity : AppCompatActivity(), SensorEventListener {
         if (values<0)
             startActivity(Intent(this, RegisterActivity::class.java))
 
+
         else if (values>0)
             Toast.makeText(this, "swap left", Toast.LENGTH_SHORT).show()
+
 
     }
 

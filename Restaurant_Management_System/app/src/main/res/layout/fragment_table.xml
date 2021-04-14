@@ -68,24 +68,69 @@
         app:layout_constraintTop_toBottomOf="@+id/people"
         tools:ignore="MissingConstraints" />
 
-    <DatePicker
-        android:id="@+id/date"
+    <TextView
+        android:id="@+id/spinnertxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:calendarViewShown="false"
-        android:datePickerMode="spinner"
+        android:layout_marginTop="22dp"
+        android:gravity="center"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/time"
         tools:ignore="MissingConstraints" />
 
+    <!--    <DatePicker-->
+    <!--        android:id="@+id/date"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_gravity="center_horizontal"-->
+    <!--        android:layout_marginTop="35dp"-->
+    <!--        android:calendarViewShown="false"-->
+    <!--        android:datePickerMode="spinner"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/spinnertxt"-->
+    <!--        tools:ignore="MissingConstraints" />-->
+
+    <Button
+        android:id="@+id/btn_date"
+        android:layout_width="347dp"
+
+        android:layout_height="wrap_content"
+        android:background="@drawable/round_border"
+        android:backgroundTint="#27a9ff"
+        android:text="Pick Date"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintCircleRadius="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnertxt"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/datetxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text=" "
+
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_date"
+        tools:ignore="MissingConstraints" />
+
     <Button
         android:id="@+id/btn_table"
-
         android:layout_width="347dp"
-        android:layout_height="wrap_content"
 
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+
+        android:background="@drawable/round_border"
         android:backgroundTint="#27a9ff"
         android:text="Book Table"
         android:textColor="@android:color/white"
@@ -94,5 +139,6 @@
         app:layout_constraintCircleRadius="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/date" />
+        app:layout_constraintTop_toBottomOf="@+id/datetxt"
+        tools:ignore="MissingConstraints" />
 </androidx.constraintlayout.widget.ConstraintLayout>

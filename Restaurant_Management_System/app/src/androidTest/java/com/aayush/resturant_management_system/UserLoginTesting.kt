@@ -23,7 +23,7 @@ class UserLoginTesting {
     val testRule = ActivityScenarioRule(LoginActivity::class.java)
 
     @Test
-    fun checkArithmeticUI() {
+    fun checkLoginUI() {
         Espresso.onView(withId(R.id.login_email))
                 .perform(ViewActions.typeText("aa@gmail.com"))
 

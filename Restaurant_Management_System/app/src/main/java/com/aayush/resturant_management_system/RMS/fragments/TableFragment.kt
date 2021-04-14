@@ -1,5 +1,6 @@
 package com.aayush.resturant_management_system.RMS.fragments
 
+import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,13 +15,16 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.util.*
 
 
 class TableFragment : Fragment() {
         private lateinit var user_email : EditText
         private lateinit var people : EditText
-        private lateinit var date : DatePicker
+        private lateinit var btn_date : Button
         private lateinit var time : Spinner
+        private lateinit var spinnertxt : TextView
+        private lateinit var datetxt : TextView
         private lateinit var btn_table : Button
 
 //
@@ -59,7 +63,9 @@ class TableFragment : Fragment() {
         user_email = view.findViewById(R.id.user_email)
         time = view.findViewById(R.id.time)
         people = view.findViewById(R.id.people)
-        date = view.findViewById(R.id.date)
+        spinnertxt = view.findViewById(R.id.spinnertxt)
+        datetxt = view.findViewById(R.id.datetxt)
+        btn_date = view.findViewById(R.id.btn_date)
 //        val day: Int = date.getDayOfMonth()
 //        val month: Int = date.getMonth() + 1
 //        val year: Int = date.getYear()
@@ -69,6 +75,44 @@ class TableFragment : Fragment() {
 //        c[2000, 11] = 31 //Year,Mounth -1,Day
 //
 //        date.setMaxDate(c.timeInMillis)
+        //calender
+        val c = Calendar.getInstance()
+        val year = c.get(Calendar.YEAR)
+        val month = c.get(Calendar.MONTH)
+     val day = c.get(Calendar.DAY_OF_MONTH)
+        btn_date.setOnClickListener(){
+            val dpd = context?.let {
+                DatePickerDialog(
+                    it, DatePickerDialog.OnDateSetListener { view, mYear, mMonth, mDay ->
+                        //set to textview
+                        datetxt.setText("" + mDay + "/" + mMonth + "/" + mYear)
+                    },
+                    year, month, day
+                )
+            }
+            //shoe dialog
+            if (dpd != null) {
+                dpd.show()
+            }
+
+        }
+        time?.onItemSelectedListener = object :AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                println("erreur")
+            }
+
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                val type = parent?.getItemAtPosition(position).toString()
+                spinnertxt.setText(type)
+                Toast.makeText(activity, type, Toast.LENGTH_LONG).show()
+                println(type)
+            }
+        }
 
         btn_table.setOnClickListener() {
             tablebooking()
@@ -78,8 +122,8 @@ class TableFragment : Fragment() {
     private  fun tablebooking() {
         val user_email = user_email.text.toString()
         val people = people.text.toString()
-        val date = date.toString()
-        val time = time.toString()
+        val date = datetxt.text.toString()
+        val time = spinnertxt.text.toString()
 
         val table = Table(user_email = user_email, people = people, date = date, time = time)
         CoroutineScope(Dispatchers.IO).launch {
