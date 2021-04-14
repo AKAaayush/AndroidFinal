@@ -80,11 +80,11 @@ class FoodItemAdapter(
                 .into(holder.fooditemimage)
         }
 
-        holder.fooditemimage.setOnClickListener {
-            val intent = Intent(context, FoodDetailsActivity::class.java)
-            intent.putExtra("foodItem",listitem)
-            context.startActivity(intent)
-    }
+//        holder.fooditemimage.setOnClickListener {
+//            val intent = Intent(context, FoodDetailsActivity::class.java)
+//            intent.putExtra("foodItem",listitem)
+//            context.startActivity(intent)
+//    }
 
         holder.addfav.setOnClickListener {
             val builder = AlertDialog.Builder(context);
