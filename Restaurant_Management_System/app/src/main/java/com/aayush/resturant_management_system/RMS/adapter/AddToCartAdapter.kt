@@ -67,6 +67,7 @@ class AddToCartAdapter (val listpost:ArrayList<ForAddItem>,
                     val repository=AddToCartRepository()
                     val response=repository.deleteFavProduct(fav._id!!)
                     if(response.success==true){
+                        
                         withContext(Dispatchers.Main){
                             listpost.removeAt(position)
                             notifyDataSetChanged()

@@ -9,6 +9,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.aayush.resturant_management_system.R
 import com.aayush.resturant_management_system.RMS.api.ServiceBuilder
@@ -96,6 +98,7 @@ class FoodItemAdapter(
                         )
                     )
                     if (response.success == true) {
+                        showfavnotification()
                         withContext(Dispatchers.Main) {
                             val snack = Snackbar.make(it, "${response.msg}", Snackbar.LENGTH_SHORT)
                             snack.setAction("Ok") {
@@ -129,6 +132,24 @@ class FoodItemAdapter(
                 .fitCenter()
                 .into(holder.fooditemimage)
         }
+
+
+    }
+
+    private fun showfavnotification() {
+
+
+
+        val notificationManager= NotificationManagerCompat.from(context)
+        val notificationChannels= NotificationChannels(context)
+        notificationChannels.createNotificationChannels()
+        val notification= NotificationCompat.Builder(context, notificationChannels.CHANNEL_1)
+            .setSmallIcon(R.drawable.logo)
+            .setContentTitle("Favorite Added")
+            .setContentText("Food Item added to favorites successfully.")
+            .setColor(Color.YELLOW)
+            .build()
+        notificationManager.notify(1, notification)
 
 
     }
