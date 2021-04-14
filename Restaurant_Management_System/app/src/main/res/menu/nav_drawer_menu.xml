@@ -4,14 +4,14 @@
     <item android:id="@+id/maps"
         android:icon="@drawable/public_icon"
         android:title="Location"/>
-    <item android:id="@+id/bmi"
+    <item android:id="@+id/profile"
         android:icon="@drawable/profile_icon"
         android:title="Profile"/>
     <item android:id="@+id/table"
         android:icon="@drawable/search_icon"
         android:title="Table"/>
-    <item android:id="@+id/settings"
+    <item android:id="@+id/Logout"
         android:icon="@drawable/search_icon"
-        android:title="Search"/>
+        android:title="Logout"/>
 
 </menu>

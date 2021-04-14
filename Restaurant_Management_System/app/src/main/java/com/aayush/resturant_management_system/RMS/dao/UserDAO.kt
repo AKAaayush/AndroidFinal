@@ -14,4 +14,7 @@ interface UserDAO {
 
 //    @Query("select * from User where email=(:email) and password=(:password)")
 //    suspend fun checkUser(email: String, password:String)
+
+    @Query("Delete from User")
+    suspend fun logout()
 }
