@@ -17,7 +17,7 @@ import androidx.room.PrimaryKey
         val food_image: String? = null
 ) :Parcelable{
     constructor(parcel: Parcel) : this(
-        parcel.readInt(),
+        parcel.readValue(Int::class.java.classLoader)as Int,
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
@@ -27,7 +27,7 @@ import androidx.room.PrimaryKey
     }
 
     override fun writeToParcel(dest: Parcel?, flags: Int) {
-        TODO("Not yet implemented")
+
     }
 
     override fun describeContents(): Int {

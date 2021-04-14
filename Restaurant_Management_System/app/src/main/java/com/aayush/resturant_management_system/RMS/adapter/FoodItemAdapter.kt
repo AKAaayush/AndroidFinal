@@ -2,6 +2,7 @@ package com.aayush.resturant_management_system.RMS.adapter
 
 import android.app.AlertDialog
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,7 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.aayush.resturant_management_system.R
+import com.aayush.resturant_management_system.RMS.`object`.FoodDetailsActivity
 import com.aayush.resturant_management_system.RMS.api.ServiceBuilder
 import com.aayush.resturant_management_system.RMS.entity.AddCart
 import com.aayush.resturant_management_system.RMS.entity.FoodItem
@@ -78,11 +80,11 @@ class FoodItemAdapter(
                 .into(holder.fooditemimage)
         }
 
-//        holder.fooditemimage.setOnClickListener {
-//            val intent = Intent(context, FoodDetailsActivity::class.java)
-//            intent.putExtra("foodItem",listitem)
-//            context.startActivity(intent)
-//    }
+        holder.fooditemimage.setOnClickListener {
+            val intent = Intent(context, FoodDetailsActivity::class.java)
+            intent.putExtra("foodItem",listitem)
+            context.startActivity(intent)
+    }
 
         holder.addfav.setOnClickListener {
             val builder = AlertDialog.Builder(context);
