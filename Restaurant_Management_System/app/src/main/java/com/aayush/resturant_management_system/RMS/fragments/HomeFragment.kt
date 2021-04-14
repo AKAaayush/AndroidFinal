@@ -12,12 +12,16 @@ import android.widget.Button
 import android.widget.HorizontalScrollView
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContentProviderCompat
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.aayush.resturant_management_system.R
+import com.aayush.resturant_management_system.RMS.`object`.LoginActivity
 import com.aayush.resturant_management_system.RMS.adapter.FoodItemAdapter
 import com.aayush.resturant_management_system.RMS.adapter.FoodMenuAdapter
 //import com.aayush.resturant_management_system.RMS.adapter.HomeAdapter
@@ -29,11 +33,8 @@ import com.aayush.resturant_management_system.RMS.entity.FoodMenu
 import com.aayush.resturant_management_system.RMS.repository.FoodItemRepository
 import com.aayush.resturant_management_system.RMS.repository.FoodMenuRepository
 import com.synnapps.carouselview.CarouselView
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-
+import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers.Main
 
 
 class HomeFragment : Fragment() {
@@ -79,7 +80,31 @@ class HomeFragment : Fragment() {
         }
 
         cartbtn.setOnClickListener {
-            loadFragment(fragment)
+//            loadFragment(fragment)
+
+            val builder = AlertDialog.Builder(requireContext())
+            builder.setMessage("DO you Want to logout")
+            builder.setIcon(android.R.drawable.ic_dialog_alert)
+            builder.setPositiveButton("yes"){dialogInterface, which->
+                val sharePref = requireActivity().getSharedPreferences("MyPref",AppCompatActivity.MODE_PRIVATE )
+                val editor = sharePref.edit()
+                editor.remove("email")
+                editor.remove("password")
+                editor.remove("_id")
+                editor.remove("name")
+                    .apply()
+
+                CoroutineScope(Dispatchers.IO).launch{
+                    Db.getInstance(requireContext()).getUserDao().logout()
+                    withContext(Main){
+                        startActivity(Intent(context, LoginActivity::class.java))
+                    }
+                }
+            }
+            builder.setNegativeButton("No"){
+                dialogInterface, which ->
+            }
+            builder.show()
         }
 
 
