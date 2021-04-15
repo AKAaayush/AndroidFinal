@@ -125,6 +125,11 @@ class TableFragment : Fragment() {
         val date = datetxt.text.toString()
         val time = spinnertxt.text.toString()
 
+        if(user_email == "" || people == "" || date == "" || time == ""){
+            validationData()
+            return
+        }
+
         val table = Table(user_email = user_email, people = people, date = date, time = time)
         CoroutineScope(Dispatchers.IO).launch {
             val repository = TableRepository()
@@ -159,6 +164,22 @@ class TableFragment : Fragment() {
         people.setText("")
 
     }
+    //    validation for Table
+    private fun validationData(){
+        if (user_email.text.isEmpty()) {
+            user_email.error = "Please enter Email"
+            return
+        }
+        if (people.text.isEmpty()) {
+            people.error = "Please enter People Number"
+            return
+        }
+
+
+
+    }
+
+
 
 
 }

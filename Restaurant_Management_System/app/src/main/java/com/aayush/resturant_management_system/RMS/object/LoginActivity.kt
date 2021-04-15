@@ -66,9 +66,6 @@ class LoginActivity : AppCompatActivity(), SensorEventListener {
         btn_login.setOnClickListener {
             login()
         }
-
-
-//open signup activity
         btnsignup.setOnClickListener() {
             startActivity(Intent(this, RegisterActivity::class.java))
         }
@@ -123,6 +120,7 @@ class LoginActivity : AppCompatActivity(), SensorEventListener {
     }
 
     private fun login() {
+        validationData()
         val email = login_email.text.toString()
         val password = login_password.text.toString()
         Toast.makeText(this, "$email Logged In!! ", Toast.LENGTH_LONG).show()
@@ -171,6 +169,22 @@ class LoginActivity : AppCompatActivity(), SensorEventListener {
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
 
     }
+
+//    Validation
+private fun validationData() {
+    if (login_email.text.isEmpty()) {
+        login_email.error = "Please enter Email"
+        return
+    }
+
+    if (login_password.text.isEmpty()) {
+        login_password.error = "Please enter Password"
+        return
+    }
+
+
+}
+
 
 
 
