@@ -34,15 +34,19 @@ class UserProfileActivity : AppCompatActivity() {
     private lateinit var etFirstname: EditText;
     private lateinit var etLastname: EditText;
     private lateinit var etemail: EditText;
+    private lateinit var etgender: EditText;
+    private lateinit var etdob: EditText;
     var imageUrl:String?=null
     private lateinit var btnDone: Button;
-    private val emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
+//    private val emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_profile)
         etFirstname=findViewById(R.id.etFirstname)
         etLastname=findViewById(R.id.etLastname)
         etemail=findViewById(R.id.etemail)
+        etgender=findViewById(R.id.etgender)
+        etdob=findViewById(R.id.etdob)
         btnDone=findViewById(R.id.btnDone)
         imgAdd=findViewById(R.id.imgAdd)
         CoroutineScope(Dispatchers.IO).launch {
@@ -62,6 +66,8 @@ class UserProfileActivity : AppCompatActivity() {
                     etFirstname.setText("${listdata.name}")
                     etLastname.setText("${listdata.address}")
                     etemail.setText("${listdata.email}")
+                    etgender.setText("${listdata.gender}")
+                    etdob.setText("${listdata.dob}")
                 }
             }
         }
@@ -69,7 +75,7 @@ class UserProfileActivity : AppCompatActivity() {
             popup()
         }
         btnDone.setOnClickListener(){
-            val user = User(_id= ServiceBuilder.id!!,name = etFirstname.text.toString(), address = etLastname.text.toString(),email = etemail.text.toString())
+            val user = User(_id= ServiceBuilder.id!!,name = etFirstname.text.toString(), address = etLastname.text.toString(),email = etemail.text.toString(), gender = etgender.text.toString(), dob = etdob.text.toString())
             CoroutineScope(Dispatchers.IO).launch {
                 val repository = UserRepository()
                 val response = repository.updateUser(user)

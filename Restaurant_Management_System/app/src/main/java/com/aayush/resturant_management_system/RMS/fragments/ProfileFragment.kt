@@ -32,13 +32,15 @@ import java.lang.Exception
 
 class ProfileFragment : Fragment() {
     //binding
-    private lateinit var profile: TextView
+//    private lateinit var profile: TextView
     private lateinit var profilename: TextView
     private lateinit var btn_logout: Button
     private lateinit var editProfile: Button
-
-
     private lateinit var email: TextView
+    private lateinit var profile_gender: TextView
+    private lateinit var profile_phone: TextView
+    private lateinit var profile_dob: TextView
+    private lateinit var profile_address: TextView
     private lateinit var image1: CircleImageView
 //    private lateinit var  welcome : TextView
 
@@ -60,11 +62,15 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        profile = view.findViewById(R.id.profile)
+//        profile = view.findViewById(R.id.profile)
         profilename = view.findViewById(R.id.profilename)
         email = view.findViewById(R.id.profile_email)
 //        welcome = view.findViewById(R.id.welcome)
         image1 = view.findViewById(R.id.circleImageView)
+        profile_gender = view.findViewById(R.id.profile_gender)
+        profile_phone = view.findViewById(R.id.profile_phone)
+        profile_dob = view.findViewById(R.id.profile_dob)
+        profile_address = view.findViewById(R.id.profile_address)
         btn_logout = view.findViewById(R.id.btn_logout)
         editProfile = view.findViewById(R.id.btn_saveprofile)
 
@@ -82,11 +88,19 @@ class ProfileFragment : Fragment() {
                     val name = "${dat!!.name}  "
                     val p_email = "${dat!!.email}"
                     val image = "${dat!!.image}"
+                    val p_phone = dat.phone
+                    val p_gender = dat.gender
+                    val p_dob = dat.dob
+                    val p_address = dat.address
 
 
                     withContext(Dispatchers.Main) {
                         profilename.text = name
                         email.text = p_email
+                        profile_phone.text = p_phone
+                        profile_gender.text = p_gender
+                        profile_dob.text = p_dob
+                        profile_address.text = p_address
 //                        welcome.text = name
 
                         val imagepath = ServiceBuilder.loadImagepath() +image
