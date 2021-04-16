@@ -16,6 +16,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.aayush.resturant_management_system.R
 import com.aayush.resturant_management_system.RMS.`object`.LoginActivity
+import com.aayush.resturant_management_system.RMS.`object`.UserProfileActivity
 import com.aayush.resturant_management_system.RMS.api.ServiceBuilder
 import com.aayush.resturant_management_system.RMS.database.Db
 import com.aayush.resturant_management_system.RMS.entity.User
@@ -34,6 +35,7 @@ class ProfileFragment : Fragment() {
     private lateinit var profile: TextView
     private lateinit var profilename: TextView
     private lateinit var btn_logout: Button
+    private lateinit var editProfile: Button
 
 
     private lateinit var email: TextView
@@ -46,9 +48,11 @@ class ProfileFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
 
+
         return view;
 
 //        profileview()
+
 
 
     }
@@ -62,6 +66,7 @@ class ProfileFragment : Fragment() {
 //        welcome = view.findViewById(R.id.welcome)
         image1 = view.findViewById(R.id.circleImageView)
         btn_logout = view.findViewById(R.id.btn_logout)
+        editProfile = view.findViewById(R.id.btn_saveprofile)
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
@@ -70,12 +75,13 @@ class ProfileFragment : Fragment() {
 
                 if (response.success == true) {
                     val data = response.data
+                    val dat = data?.get(0)
 //                    val d = data?.get(0)
                     Log.d("data is " ,response.data!!.toString())
 //                    Log.d("Data is: ", response.data.toString())
-                    val name = "${data!!.name}  "
-                    val p_email = "${data!!.email}"
-                    val image = "${data!!.image}"
+                    val name = "${dat!!.name}  "
+                    val p_email = "${dat!!.email}"
+                    val image = "${dat!!.image}"
 
 
                     withContext(Dispatchers.Main) {
@@ -107,6 +113,12 @@ class ProfileFragment : Fragment() {
                 Log.d("25A:", e.localizedMessage)
                 withContext(Dispatchers.Main) {
                     Toast.makeText(context, "Here", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            editProfile.setOnClickListener {
+                activity?.let {
+                    startActivity(Intent(context,UserProfileActivity::class.java))
                 }
             }
 

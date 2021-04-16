@@ -20,7 +20,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Resturant_Management_System"
         android:usesCleartextTraffic="true">
-        <activity android:name=".RMS.object.PocketActivity"></activity>
+        <activity android:name=".RMS.object.UserProfileActivity"></activity>
+        <activity android:name=".RMS.object.PocketActivity" />
         <activity android:name=".RMS.object.FavActivity" />
         <activity android:name=".RMS.object.TableActivity" />
         <!--
