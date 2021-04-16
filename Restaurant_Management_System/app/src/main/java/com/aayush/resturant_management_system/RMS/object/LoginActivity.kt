@@ -25,15 +25,16 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 
-class LoginActivity : AppCompatActivity(), SensorEventListener {
+class LoginActivity : AppCompatActivity() {
+//    , SensorEventListener
     private lateinit var login_email: EditText
     private lateinit var login_password: EditText
     private lateinit var btn_login: Button
     private lateinit var btnsignup: Button
     private lateinit var linearlayout: ConstraintLayout
 
-    private lateinit var sensorManager: SensorManager
-    private var sensor:Sensor?=null
+//    private lateinit var sensorManager: SensorManager
+//    private var sensor:Sensor?=null
 
     private val permissions = arrayOf(
             android.Manifest.permission.CAMERA,
@@ -53,7 +54,7 @@ class LoginActivity : AppCompatActivity(), SensorEventListener {
 
 
 
-        sensorManager= getSystemService(SENSOR_SERVICE) as SensorManager
+//        sensorManager= getSystemService(SENSOR_SERVICE) as SensorManager
 //
 //        if(!checkSensor())
 //            return
@@ -81,17 +82,17 @@ class LoginActivity : AppCompatActivity(), SensorEventListener {
 //        return flag
 //    }
 
-    override fun onSensorChanged(event: SensorEvent?){
-//        val values=event!!.values[1]
-//        if (values<0)
-//            startActivity(Intent(this, RegisterActivity::class.java))
+//    override fun onSensorChanged(event: SensorEvent?){
+////        val values=event!!.values[1]
+////        if (values<0)
+////            startActivity(Intent(this, RegisterActivity::class.java))
+////
+////
+////        else if (values>0)
+////            Toast.makeText(this, "swap left", Toast.LENGTH_SHORT).show()
+////
 //
-//
-//        else if (values>0)
-//            Toast.makeText(this, "swap left", Toast.LENGTH_SHORT).show()
-//
-
-    }
+//    }
 
 
     private fun checkRunTimePermission() {
@@ -166,9 +167,9 @@ class LoginActivity : AppCompatActivity(), SensorEventListener {
         }
     }
 
-    override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
-
-    }
+//    override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
+//
+//    }
 
 //    Validation
 private fun validationData() {

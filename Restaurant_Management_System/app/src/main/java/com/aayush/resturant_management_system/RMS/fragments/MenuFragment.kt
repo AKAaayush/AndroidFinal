@@ -20,6 +20,10 @@ import kotlinx.coroutines.withContext
 
 
 class MenuFragment : Fragment() {
+//    sensor
+//    private lateinit var sensorManager: SensorManager
+//    private var sensor: Sensor?=null
+
     private lateinit var menurecycler: RecyclerView
 
 
@@ -28,9 +32,16 @@ class MenuFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_menu, container, false)
         menurecycler=view.findViewById(R.id.menurecycler)
 
+
         getData()
+
         return view;
     }
+
+
+
+
+
 
 
     fun getData(){
@@ -62,5 +73,7 @@ class MenuFragment : Fragment() {
         }
 
     }
+
+
 
 }

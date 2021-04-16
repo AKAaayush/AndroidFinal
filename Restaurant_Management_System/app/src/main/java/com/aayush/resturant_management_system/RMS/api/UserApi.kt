@@ -31,7 +31,7 @@ interface UserApi {
 
 
 
-    @PUT("user/updatea")
+    @PUT("user/update")
     suspend fun updateUser(
         @Header("Authorization") token: String,
         @Body user: User
@@ -39,7 +39,7 @@ interface UserApi {
 
 
     @Multipart
-    @PUT("update/Profile/{id}")
+    @PUT("update/user/Profile/{id}")
     suspend fun  uploadImage(
         @Header("Authorization") token: String,
         @Path("id") id:String,

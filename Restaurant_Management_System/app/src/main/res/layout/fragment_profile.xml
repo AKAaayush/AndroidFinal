@@ -5,164 +5,9 @@
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android" >
 
-<!--    <androidx.constraintlayout.widget.ConstraintLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="1000dp"-->
-<!--        tools:context=".RMS.fragments.ProfileFragment">-->
-
-<!--       -->
-
-<!--        <TextView-->
-<!--            android:id="@+id/profile"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:gravity="center"-->
-<!--            android:text="Profile"-->
-<!--            android:textSize="30sp"-->
-<!--            android:textStyle="bold"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent" />-->
-
-<!--        <de.hdodenhof.circleimageview.CircleImageView-->
-<!--            android:id="@+id/circleImageView"-->
-<!--            android:layout_width="218dp"-->
-<!--            android:layout_height="191dp"-->
-<!--            android:layout_marginTop="12dp"-->
-<!--            android:src="@drawable/profile"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintHorizontal_bias="0.487"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/profile"-->
-<!--            tools:ignore="MissingConstraints" />-->
-
-<!--        <ImageButton-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:src="@drawable/camera"-->
-<!--            app:layout_constraintBottom_toBottomOf="@+id/circleImageView"-->
-<!--            app:layout_constraintEnd_toEndOf="@+id/circleImageView"-->
-<!--            app:layout_constraintHorizontal_bias="0.929"-->
-<!--            app:layout_constraintStart_toStartOf="@+id/circleImageView"-->
-<!--            app:layout_constraintTop_toTopOf="@+id/circleImageView"-->
-<!--            app:layout_constraintVertical_bias="0.878"-->
-<!--            tools:ignore="MissingConstraints" />-->
-
-<!--        <TextView-->
-<!--            android:id="@+id/profilename"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginTop="16dp"-->
-<!--            android:gravity="center"-->
-<!--            android:text="Aayush Shrestha"-->
-<!--            android:textSize="30sp"-->
-<!--            android:textStyle="bold"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/circleImageView" />-->
-
-<!--        <EditText-->
-<!--            android:id="@+id/profile_name"-->
-<!--            android:layout_width="347dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginTop="20dp"-->
-<!--            android:background="@drawable/round_border"-->
-<!--            android:drawableStart="@drawable/person"-->
-<!--            android:drawablePadding="16dp"-->
-<!--            android:ems="10"-->
-<!--            android:hint="Name"-->
-<!--            android:padding="16dp"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/profilename" />-->
-
-<!--        <EditText-->
-<!--            android:id="@+id/profile_email"-->
-<!--            android:layout_width="347dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginTop="20dp"-->
-<!--            android:background="@drawable/round_border"-->
-<!--            android:drawableStart="@drawable/email"-->
-<!--            android:drawablePadding="16dp"-->
-<!--            android:ems="10"-->
-<!--            android:hint="Email"-->
-<!--            android:padding="16dp"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/profile_name" />-->
-
-<!--        <Spinner-->
-<!--            android:id="@+id/spnGender"-->
-<!--            android:layout_width="350dp"-->
-<!--            android:layout_height="51dp"-->
-<!--            android:layout_marginTop="20dp"-->
-<!--            android:background="@drawable/round_border"-->
-<!--            android:drawableStart="@drawable/person"-->
-<!--            android:drawablePadding="16dp"-->
-<!--            android:ems="10"-->
-<!--            android:entries="@array/gender"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/profile_email"-->
-<!--            tools:ignore="MissingConstraints" />-->
-
-<!--        <Button-->
-<!--            android:id="@+id/btn_saveprofile"-->
-
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginStart="32dp"-->
-<!--            android:layout_marginTop="12dp"-->
-<!--            android:layout_marginEnd="32dp"-->
-<!--            android:background="@drawable/round_border"-->
-<!--            android:backgroundTint="#27a9ff"-->
-<!--            android:text="Save Profile"-->
-<!--            android:textColor="@android:color/white"-->
-<!--            android:textSize="18sp"-->
-<!--            android:textStyle="bold"-->
-<!--            app:layout_constraintCircleRadius="50dp"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintHorizontal_bias="1.0"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/spnGender" />-->
-
-<!--        <Button-->
-<!--            android:id="@+id/btn_logout"-->
-
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginStart="32dp"-->
-<!--            android:layout_marginTop="72dp"-->
-<!--            android:layout_marginEnd="32dp"-->
-<!--            android:background="@drawable/round_border"-->
-<!--            android:backgroundTint="#27a9ff"-->
-<!--            android:text="Logout"-->
-<!--            android:textColor="@android:color/white"-->
-<!--            android:textSize="18sp"-->
-<!--            android:textStyle="bold"-->
-<!--            app:layout_constraintCircleRadius="50dp"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintHorizontal_bias="1.0"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/spnGender" />-->
-
-<!--        <com.google.android.material.bottomnavigation.BottomNavigationView-->
-<!--            android:id="@+id/bottomNav"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginTop="16dp"-->
-<!--            android:background="@color/white"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintHorizontal_bias="0.0"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/btn_logout"-->
-<!--            app:menu="@menu/bottomnav_menu"-->
-<!--            tools:ignore="MissingConstraints" />-->
-
-
-<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
 
     <RelativeLayout
+        android:id="@+id/userprofile"
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
@@ -384,7 +229,7 @@
                     android:layout_marginTop="15dp"
                     android:orientation="vertical">
                     <Button
-                        android:id="@+id/btn_saveprofile"
+                        android:id="@+id/btn_editprofile"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Edit Profile"
