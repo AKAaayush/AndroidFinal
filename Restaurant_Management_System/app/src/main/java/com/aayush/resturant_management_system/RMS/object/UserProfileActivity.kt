@@ -1,6 +1,8 @@
 package com.aayush.resturant_management_system.RMS.`object`
 
 import android.app.Activity
+import android.app.DatePickerDialog
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -8,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
+import android.util.AttributeSet
+import android.view.View
 import android.widget.*
 import com.aayush.resturant_management_system.R
 import com.aayush.resturant_management_system.RMS.api.ServiceBuilder
@@ -31,24 +35,75 @@ class UserProfileActivity : AppCompatActivity() {
     private val REQUEST_GALLERY_CODE=0;
     private val REQUEST_CAMERA_CODE=1;
     private lateinit var imgAdd: ImageView;
-    private lateinit var etFirstname: EditText;
-    private lateinit var etLastname: EditText;
-    private lateinit var etemail: EditText;
-    private lateinit var etgender: EditText;
-    private lateinit var etdob: EditText;
+    private lateinit var edit_name: EditText;
+    private lateinit var edit_email: EditText;
+    private lateinit var edit_address: EditText;
+    private lateinit var edit_gender: Spinner;
+    private lateinit var edit_phone: EditText;
+    private lateinit var profilename: TextView;
+    private lateinit var dob: TextView;
+    private lateinit var gender: TextView;
+    private lateinit var btn_dobdate: Button;
     var imageUrl:String?=null
-    private lateinit var btnDone: Button;
+    private lateinit var btn_saveprofile: Button;
 //    private val emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_profile)
-        etFirstname=findViewById(R.id.etFirstname)
-        etLastname=findViewById(R.id.etLastname)
-        etemail=findViewById(R.id.etemail)
-        etgender=findViewById(R.id.etgender)
-        etdob=findViewById(R.id.etdob)
-        btnDone=findViewById(R.id.btnDone)
+        edit_name=findViewById(R.id.edit_name)
+        edit_email=findViewById(R.id.edit_email)
+        edit_gender=findViewById(R.id.edit_gender)
+        edit_address=findViewById(R.id.edit_address)
+        edit_phone=findViewById(R.id.edit_phone)
+        btn_dobdate=findViewById(R.id.btn_dobdate)
+        profilename=findViewById(R.id.profilename)
+        dob=findViewById(R.id.dob)
+        gender=findViewById(R.id.gender)
+        btn_saveprofile=findViewById(R.id.btn_saveprofile)
         imgAdd=findViewById(R.id.imgAdd)
+//    calender for dob
+    val c = Calendar.getInstance()
+    val year = c.get(Calendar.YEAR)
+    val month = c.get(Calendar.MONTH)
+    val day = c.get(Calendar.DAY_OF_MONTH)
+    btn_dobdate.setOnClickListener(){
+        val dpd = this?.let {
+            DatePickerDialog(
+                it, DatePickerDialog.OnDateSetListener { view, mYear, mMonth, mDay ->
+                    //set to textview
+                    dob.setText("" + mDay + "/" + mMonth + "/" + mYear)
+                },
+                year, month, day
+            )
+        }
+        //shoe dialog
+        if (dpd != null) {
+            dpd.show()
+        }
+
+    }
+
+//    spinner gender
+    edit_gender?.onItemSelectedListener = object :AdapterView.OnItemSelectedListener {
+        override fun onNothingSelected(parent: AdapterView<*>?) {
+            println("erreur")
+        }
+
+        override fun onItemSelected(
+            parent: AdapterView<*>?,
+            view: View?,
+            position: Int,
+            id: Long
+        ) {
+            val type = parent?.getItemAtPosition(position).toString()
+            gender.setText(type)
+            println(type)
+        }
+    }
+
+
+
+
         CoroutineScope(Dispatchers.IO).launch {
             val repository= UserRepository()
             val response=repository.getUser(ServiceBuilder.id!!)
@@ -63,19 +118,26 @@ class UserProfileActivity : AppCompatActivity() {
                             .load(imagePath)
                             .into(imgAdd)
                     }
-                    etFirstname.setText("${listdata.name}")
-                    etLastname.setText("${listdata.address}")
-                    etemail.setText("${listdata.email}")
-                    etgender.setText("${listdata.gender}")
-                    etdob.setText("${listdata.dob}")
+                    edit_name.setText("${listdata.name}")
+                    edit_address.setText("${listdata.address}")
+                    edit_email.setText("${listdata.email}")
+                    edit_phone.setText("${listdata.phone}")
+                    profilename.setText("${listdata.name}")
+//                    dob.setText("${listdata.dob}")
+//                    etgender.setText("${listdata.gender}")
+//                    etdob.setText("${listdata.dob}")
                 }
             }
         }
         imgAdd.setOnClickListener(){
             popup()
         }
-        btnDone.setOnClickListener(){
-            val user = User(_id= ServiceBuilder.id!!,name = etFirstname.text.toString(), address = etLastname.text.toString(),email = etemail.text.toString(), gender = etgender.text.toString(), dob = etdob.text.toString())
+    btn_saveprofile.setOnClickListener(){
+            val user = User(_id= ServiceBuilder.id!!,name = edit_name.text.toString(), address = edit_address.text.toString(),email = edit_email.text.toString(), phone = edit_phone.text.toString(),
+                dob = dob.text.toString(),gender = gender.text.toString()
+//                gender = etgender.text.toString(), dob = etdob.text.toString()
+
+            )
             CoroutineScope(Dispatchers.IO).launch {
                 val repository = UserRepository()
                 val response = repository.updateUser(user)
@@ -93,9 +155,45 @@ class UserProfileActivity : AppCompatActivity() {
                         Toast.makeText(this@UserProfileActivity, "error occours", Toast.LENGTH_SHORT).show()
                     }
                 }
+                finish()
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(this@UserProfileActivity, "Profile Edited", Toast.LENGTH_SHORT).show()
+                }
+
             }
         }
     }
+
+//    override fun onCreateView(name: String, context: Context, attrs: AttributeSet): View? {
+//        dob=findViewById(R.id.dob)
+//        btn_dobdate=findViewById(R.id.btn_dobdate)
+//
+//        val c = Calendar.getInstance()
+//        val year = c.get(Calendar.YEAR)
+//        val month = c.get(Calendar.MONTH)
+//        val day = c.get(Calendar.DAY_OF_MONTH)
+//        btn_dobdate.setOnClickListener(){
+//            val dpd = this?.let {
+//                DatePickerDialog(
+//                    it, DatePickerDialog.OnDateSetListener { view, mYear, mMonth, mDay ->
+//                        //set to textview
+//                        dob.setText("" + mDay + "/" + mMonth + "/" + mYear)
+//                    },
+//                    year, month, day
+//                )
+//            }
+//            //shoe dialog
+//            if (dpd != null) {
+//                dpd.show()
+//            }
+//
+//        }
+//
+//        return super.onCreateView(name, context, attrs)
+//
+//
+//
+//    }
     private fun popup(){
         val popupMenu= PopupMenu(this,imgAdd)
         popupMenu.menuInflater.inflate(R.menu.gallery_camera_menu,popupMenu.menu)
