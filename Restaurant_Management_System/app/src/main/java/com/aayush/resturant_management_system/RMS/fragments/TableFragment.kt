@@ -27,35 +27,7 @@ class TableFragment : Fragment() {
         private lateinit var datetxt : TextView
         private lateinit var btn_table : Button
 
-//
-//      fun onCreate(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
-//        super.onCreate(savedInstanceState)
-//        val view = inflater.inflate(R.layout.fragment_table, container, false)
-//
-//        user_email = view.findViewById(R.id.user_email)
-//        time = view.findViewById(R.id.time)
-//        people = view.findViewById(R.id.people)
-//        date = view.findViewById(R.id.date)
-//          btn_table = view.findViewById(R.id.btn_table)
-//
-//          btn_table.setOnClickListener(){
-////              Toast.makeText(context, "error Booked", Toast.LENGTH_SHORT).show()
-////
-////              tablebooking()
-//              startActivity(context, TableActivity::class.java))
-//          }
-//
-//        return view
-//    }
 
-//    override fun onCreate(inflater: LayoutInflater, container: ViewGroup?,
-//                          savedInstanceState: Bundle?): View?  {
-//
-//
-//
-//        return inflater.inflate(R.layout.fragment_table, container, false)
-//
-//    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -66,15 +38,6 @@ class TableFragment : Fragment() {
         spinnertxt = view.findViewById(R.id.spinnertxt)
         datetxt = view.findViewById(R.id.datetxt)
         btn_date = view.findViewById(R.id.btn_date)
-//        val day: Int = date.getDayOfMonth()
-//        val month: Int = date.getMonth() + 1
-//        val year: Int = date.getYear()
-        //For Data of birth
-//        date = view.findViewById<DatePicker>(R.id.date)
-//        val c = Calendar.getInstance()
-//        c[2000, 11] = 31 //Year,Mounth -1,Day
-//
-//        date.setMaxDate(c.timeInMillis)
         //calender
         val c = Calendar.getInstance()
         val year = c.get(Calendar.YEAR)
@@ -171,7 +134,7 @@ class TableFragment : Fragment() {
             return
         }
         if (people.text.isEmpty()) {
-            people.error = "Please enter People Number"
+            people.error = "Please enter Number of People"
             return
         }
 
