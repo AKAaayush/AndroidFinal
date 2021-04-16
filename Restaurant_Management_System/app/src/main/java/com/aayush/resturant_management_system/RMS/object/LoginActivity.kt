@@ -33,8 +33,8 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var btnsignup: Button
     private lateinit var linearlayout: ConstraintLayout
 
-    private lateinit var sensorManager: SensorManager
-    private var sensor:Sensor?=null
+//    private lateinit var sensorManager: SensorManager
+//    private var sensor:Sensor?=null
 
     private val permissions = arrayOf(
             android.Manifest.permission.CAMERA,
@@ -54,7 +54,7 @@ class LoginActivity : AppCompatActivity() {
 
 
 
-        sensorManager= getSystemService(SENSOR_SERVICE) as SensorManager
+//        sensorManager= getSystemService(SENSOR_SERVICE) as SensorManager
 //
 //        if(!checkSensor())
 //            return
@@ -63,7 +63,7 @@ class LoginActivity : AppCompatActivity() {
 //            sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL  )
 //        }
 
-//        checkRunTimePermission()
+        checkRunTimePermission()
         btn_login.setOnClickListener {
             login()
         }
@@ -95,11 +95,11 @@ class LoginActivity : AppCompatActivity() {
 //    }
 
 
-//    private fun checkRunTimePermission() {
-//        if (!hasPermission()) {
-//            requestPermission()
-//        }
-//    }
+    private fun checkRunTimePermission() {
+        if (!hasPermission()) {
+            requestPermission()
+        }
+    }
 
     private fun hasPermission(): Boolean {
         var hasPermission = true
@@ -116,9 +116,9 @@ class LoginActivity : AppCompatActivity() {
         return hasPermission
     }
 
-//    private fun requestPermission() {
-//        ActivityCompat.requestPermissions(this@LoginActivity, permissions, 1)
-//    }
+    private fun requestPermission() {
+        ActivityCompat.requestPermissions(this@LoginActivity, permissions, 1)
+    }
 
     private fun login() {
         validationData()

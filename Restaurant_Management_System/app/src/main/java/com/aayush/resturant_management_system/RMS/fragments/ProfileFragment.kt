@@ -35,7 +35,6 @@ class ProfileFragment : Fragment() {
     private lateinit var profile_gender: TextView
     private lateinit var profile_phone: TextView
     private lateinit var profile_dob: TextView
-    private lateinit var welcome: TextView
     private lateinit var profile_address: TextView
     private lateinit var image1: CircleImageView
 
@@ -45,23 +44,15 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
-
-
         return view;
-
-//        profileview()
-
-
 
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        profile = view.findViewById(R.id.profile)
         profilename = view.findViewById(R.id.profilename)
         email = view.findViewById(R.id.profile_email)
-//        welcome = view.findViewById(R.id.welcome)
         image1 = view.findViewById(R.id.circleImageView)
         profile_gender = view.findViewById(R.id.profile_gender)
         profile_phone = view.findViewById(R.id.profile_phone)
@@ -69,7 +60,6 @@ class ProfileFragment : Fragment() {
         profile_address = view.findViewById(R.id.profile_address)
         btn_logout = view.findViewById(R.id.btn_logout)
         editProfile = view.findViewById(R.id.btn_editprofile)
-
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
@@ -79,11 +69,8 @@ class ProfileFragment : Fragment() {
                 if (response.success == true) {
                     val data = response.data
                     val dat = data?.get(0)
-//                    val d = data?.get(0)
-                    Log.d("data is " ,response.data!!.toString())
-//                    Log.d("Data is: ", response.data.toString())
+                    Log.d("data is ", response.data!!.toString())
                     val name = "${dat!!.name}  "
-                    val welcomename = "${dat!!.name}  "
                     val p_email = "${dat!!.email}"
                     val image = "${dat!!.image}"
                     val p_phone = dat.phone
@@ -95,21 +82,20 @@ class ProfileFragment : Fragment() {
                     withContext(Dispatchers.Main) {
                         profilename.text = name
                         email.text = p_email
-                        welcome.text = welcomename
                         profile_phone.text = p_phone
                         profile_gender.text = p_gender
                         profile_dob.text = p_dob
                         profile_address.text = p_address
 
 
-                        val imagepath = ServiceBuilder.loadImagepath() +image
-                        if(image != null){
-                        if(!image.equals("noimg")!!){
-                            Glide.with(requireActivity())
-                                .load(imagepath)
-                                .into((image1))
+                        val imagepath = ServiceBuilder.loadImagepath() + image
+                        if (image != null) {
+                            if (!image.equals("noimg")!!) {
+                                Glide.with(requireActivity())
+                                    .load(imagepath)
+                                    .into((image1))
+                            }
                         }
-                    }
 
                         Toast.makeText(context, "check", Toast.LENGTH_SHORT).show()
 
@@ -131,7 +117,7 @@ class ProfileFragment : Fragment() {
 
             editProfile.setOnClickListener {
                 activity?.let {
-                    startActivity(Intent(context,UserProfileActivity::class.java))
+                    startActivity(Intent(context, UserProfileActivity::class.java))
                 }
             }
 
@@ -140,13 +126,12 @@ class ProfileFragment : Fragment() {
 
 
         btn_logout.setOnClickListener {
-//            loadFragment(fragment)
-
             val builder = AlertDialog.Builder(requireContext())
             builder.setMessage("DO you Want to logout")
             builder.setIcon(android.R.drawable.ic_dialog_alert)
-            builder.setPositiveButton("yes"){dialogInterface, which->
-                val sharePref = requireActivity().getSharedPreferences("MyPref", AppCompatActivity.MODE_PRIVATE )
+            builder.setPositiveButton("yes") { dialogInterface, which ->
+                val sharePref =
+                    requireActivity().getSharedPreferences("MyPref", AppCompatActivity.MODE_PRIVATE)
                 val editor = sharePref.edit()
                 editor.remove("email")
                 editor.remove("password")
@@ -154,19 +139,17 @@ class ProfileFragment : Fragment() {
                 editor.remove("name")
                     .apply()
 
-                CoroutineScope(Dispatchers.IO).launch{
+                CoroutineScope(Dispatchers.IO).launch {
                     Db.getInstance(requireContext()).getUserDao().logout()
-                    withContext(Dispatchers.Main){
+                    withContext(Dispatchers.Main) {
                         startActivity(Intent(context, LoginActivity::class.java))
                     }
                 }
 
             }
-            builder.setNegativeButton("No"){
-                    dialogInterface, which ->
+            builder.setNegativeButton("No") { dialogInterface, which ->
             }
             builder.show()
-
 
 
         }
