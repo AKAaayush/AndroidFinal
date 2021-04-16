@@ -54,21 +54,18 @@ class LoginActivity : AppCompatActivity(), SensorEventListener {
 
 
         sensorManager= getSystemService(SENSOR_SERVICE) as SensorManager
-
-        if(!checkSensor())
-            return
-        else{
-            sensor= sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE)
-            sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL  )
-        }
+//
+//        if(!checkSensor())
+//            return
+//        else{
+//            sensor= sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE)
+//            sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL  )
+//        }
 
         checkRunTimePermission()
         btn_login.setOnClickListener {
             login()
         }
-
-
-//open signup activity
         btnsignup.setOnClickListener() {
             startActivity(Intent(this, RegisterActivity::class.java))
         }
@@ -76,23 +73,23 @@ class LoginActivity : AppCompatActivity(), SensorEventListener {
 
     }
 
-    private fun checkSensor(): Boolean {
-        var flag=true
-        if(sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE)==null){
-            flag= false
-        }
-        return flag
-    }
+//    private fun checkSensor(): Boolean {
+//        var flag=true
+//        if(sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE)==null){
+//            flag= false
+//        }
+//        return flag
+//    }
 
     override fun onSensorChanged(event: SensorEvent?){
-        val values=event!!.values[1]
-        if (values<0)
-            startActivity(Intent(this, RegisterActivity::class.java))
-
-
-        else if (values>0)
-            Toast.makeText(this, "swap left", Toast.LENGTH_SHORT).show()
-
+//        val values=event!!.values[1]
+//        if (values<0)
+//            startActivity(Intent(this, RegisterActivity::class.java))
+//
+//
+//        else if (values>0)
+//            Toast.makeText(this, "swap left", Toast.LENGTH_SHORT).show()
+//
 
     }
 
@@ -123,6 +120,7 @@ class LoginActivity : AppCompatActivity(), SensorEventListener {
     }
 
     private fun login() {
+        validationData()
         val email = login_email.text.toString()
         val password = login_password.text.toString()
         Toast.makeText(this, "$email Logged In!! ", Toast.LENGTH_LONG).show()
@@ -171,6 +169,22 @@ class LoginActivity : AppCompatActivity(), SensorEventListener {
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
 
     }
+
+//    Validation
+private fun validationData() {
+    if (login_email.text.isEmpty()) {
+        login_email.error = "Please enter Email"
+        return
+    }
+
+    if (login_password.text.isEmpty()) {
+        login_password.error = "Please enter Password"
+        return
+    }
+
+
+}
+
 
 
 

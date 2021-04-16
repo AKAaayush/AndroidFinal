@@ -16,6 +16,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.aayush.resturant_management_system.R
 import com.aayush.resturant_management_system.RMS.`object`.LoginActivity
+import com.aayush.resturant_management_system.RMS.`object`.UserProfileActivity
 import com.aayush.resturant_management_system.RMS.api.ServiceBuilder
 import com.aayush.resturant_management_system.RMS.database.Db
 import com.aayush.resturant_management_system.RMS.entity.User
@@ -31,12 +32,15 @@ import java.lang.Exception
 
 class ProfileFragment : Fragment() {
     //binding
-    private lateinit var profile: TextView
+//    private lateinit var profile: TextView
     private lateinit var profilename: TextView
     private lateinit var btn_logout: Button
-
-
+    private lateinit var editProfile: Button
     private lateinit var email: TextView
+    private lateinit var profile_gender: TextView
+    private lateinit var profile_phone: TextView
+    private lateinit var profile_dob: TextView
+    private lateinit var profile_address: TextView
     private lateinit var image1: CircleImageView
 //    private lateinit var  welcome : TextView
 
@@ -46,9 +50,11 @@ class ProfileFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
 
+
         return view;
 
 //        profileview()
+
 
 
     }
@@ -56,12 +62,17 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        profile = view.findViewById(R.id.profile)
+//        profile = view.findViewById(R.id.profile)
         profilename = view.findViewById(R.id.profilename)
         email = view.findViewById(R.id.profile_email)
 //        welcome = view.findViewById(R.id.welcome)
         image1 = view.findViewById(R.id.circleImageView)
+        profile_gender = view.findViewById(R.id.profile_gender)
+        profile_phone = view.findViewById(R.id.profile_phone)
+        profile_dob = view.findViewById(R.id.profile_dob)
+        profile_address = view.findViewById(R.id.profile_address)
         btn_logout = view.findViewById(R.id.btn_logout)
+        editProfile = view.findViewById(R.id.btn_saveprofile)
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
@@ -70,17 +81,26 @@ class ProfileFragment : Fragment() {
 
                 if (response.success == true) {
                     val data = response.data
+                    val dat = data?.get(0)
 //                    val d = data?.get(0)
                     Log.d("data is " ,response.data!!.toString())
 //                    Log.d("Data is: ", response.data.toString())
-                    val name = "${data!!.name}  "
-                    val p_email = "${data!!.email}"
-                    val image = "${data!!.image}"
+                    val name = "${dat!!.name}  "
+                    val p_email = "${dat!!.email}"
+                    val image = "${dat!!.image}"
+                    val p_phone = dat.phone
+                    val p_gender = dat.gender
+                    val p_dob = dat.dob
+                    val p_address = dat.address
 
 
                     withContext(Dispatchers.Main) {
                         profilename.text = name
                         email.text = p_email
+                        profile_phone.text = p_phone
+                        profile_gender.text = p_gender
+                        profile_dob.text = p_dob
+                        profile_address.text = p_address
 //                        welcome.text = name
 
                         val imagepath = ServiceBuilder.loadImagepath() +image
@@ -107,6 +127,12 @@ class ProfileFragment : Fragment() {
                 Log.d("25A:", e.localizedMessage)
                 withContext(Dispatchers.Main) {
                     Toast.makeText(context, "Here", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            editProfile.setOnClickListener {
+                activity?.let {
+                    startActivity(Intent(context,UserProfileActivity::class.java))
                 }
             }
 
