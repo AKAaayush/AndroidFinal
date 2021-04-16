@@ -25,7 +25,8 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 
-class LoginActivity : AppCompatActivity(), SensorEventListener {
+class LoginActivity : AppCompatActivity() {
+//    , SensorEventListener
     private lateinit var login_email: EditText
     private lateinit var login_password: EditText
     private lateinit var btn_login: Button
@@ -62,7 +63,7 @@ class LoginActivity : AppCompatActivity(), SensorEventListener {
 //            sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL  )
 //        }
 
-        checkRunTimePermission()
+//        checkRunTimePermission()
         btn_login.setOnClickListener {
             login()
         }
@@ -81,24 +82,24 @@ class LoginActivity : AppCompatActivity(), SensorEventListener {
 //        return flag
 //    }
 
-    override fun onSensorChanged(event: SensorEvent?){
-//        val values=event!!.values[1]
-//        if (values<0)
-//            startActivity(Intent(this, RegisterActivity::class.java))
+//    override fun onSensorChanged(event: SensorEvent?){
+////        val values=event!!.values[1]
+////        if (values<0)
+////            startActivity(Intent(this, RegisterActivity::class.java))
+////
+////
+////        else if (values>0)
+////            Toast.makeText(this, "swap left", Toast.LENGTH_SHORT).show()
+////
 //
-//
-//        else if (values>0)
-//            Toast.makeText(this, "swap left", Toast.LENGTH_SHORT).show()
-//
-
-    }
+//    }
 
 
-    private fun checkRunTimePermission() {
-        if (!hasPermission()) {
-            requestPermission()
-        }
-    }
+//    private fun checkRunTimePermission() {
+//        if (!hasPermission()) {
+//            requestPermission()
+//        }
+//    }
 
     private fun hasPermission(): Boolean {
         var hasPermission = true
@@ -115,9 +116,9 @@ class LoginActivity : AppCompatActivity(), SensorEventListener {
         return hasPermission
     }
 
-    private fun requestPermission() {
-        ActivityCompat.requestPermissions(this@LoginActivity, permissions, 1)
-    }
+//    private fun requestPermission() {
+//        ActivityCompat.requestPermissions(this@LoginActivity, permissions, 1)
+//    }
 
     private fun login() {
         validationData()
@@ -166,9 +167,9 @@ class LoginActivity : AppCompatActivity(), SensorEventListener {
         }
     }
 
-    override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
-
-    }
+//    override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
+//
+//    }
 
 //    Validation
 private fun validationData() {

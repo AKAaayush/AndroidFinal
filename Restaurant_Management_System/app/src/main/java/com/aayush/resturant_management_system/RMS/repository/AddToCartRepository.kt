@@ -9,7 +9,7 @@ import com.aayush.resturant_management_system.RMS.response.ForAddItemRespomse
 
 class AddToCartRepository : ApiRequest(){
     val myApi= ServiceBuilder.buildServices(AddtoCartApi::class.java)
-    suspend fun getallFavProdcut(id:String): ForAddItemRespomse {
+    suspend fun getallFavFoodItem(id:String): ForAddItemRespomse {
         return apiRequest {
             myApi.getAllFavProduct(ServiceBuilder.token!!,id)
         }

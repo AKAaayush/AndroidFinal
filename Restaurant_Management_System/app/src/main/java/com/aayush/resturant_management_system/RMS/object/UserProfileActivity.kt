@@ -147,7 +147,7 @@ class UserProfileActivity : AppCompatActivity() {
                     if(imageUrl != null){
                         uploadImage(id!!)
                         withContext(Dispatchers.Main) {
-                            Toast.makeText(this@UserProfileActivity, "Student Added Successfully", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@UserProfileActivity, "User Edited Successfully", Toast.LENGTH_SHORT).show()
                         }
                     }
                 } else {
@@ -158,6 +158,7 @@ class UserProfileActivity : AppCompatActivity() {
                 finish()
                 withContext(Dispatchers.Main) {
                     Toast.makeText(this@UserProfileActivity, "Profile Edited", Toast.LENGTH_SHORT).show()
+
                 }
 
             }
@@ -247,7 +248,7 @@ class UserProfileActivity : AppCompatActivity() {
             file // it will return null
         }
     }
-    private fun uploadImage(studentId: String) {
+    private fun uploadImage(userId: String) {
         if (imageUrl != null) {
             val file = File(imageUrl!!)
             val reqFile =
@@ -256,7 +257,7 @@ class UserProfileActivity : AppCompatActivity() {
                 MultipartBody.Part.createFormData("file", file.name, reqFile)
             CoroutineScope(Dispatchers.IO).launch {
                 val userRepository = UserRepository()
-                val response = userRepository.uploadImage(studentId, body)
+                val response = userRepository.uploadImage(userId, body)
                 if (response.success == true) {
                     withContext(Dispatchers.Main) {
                         Toast.makeText(this@UserProfileActivity, "Uploaded", Toast.LENGTH_SHORT)
