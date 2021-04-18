@@ -1,15 +1,21 @@
 package com.aayush.resturant_management_system.RMS.fragments
 
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
 import com.aayush.resturant_management_system.R
+import com.aayush.resturant_management_system.RMS.`object`.UserProfileActivity
+import com.aayush.resturant_management_system.RMS.api.ServiceBuilder
 import com.aayush.resturant_management_system.RMS.entity.Table
 import com.aayush.resturant_management_system.RMS.repository.TableRepository
+import com.aayush.resturant_management_system.RMS.repository.UserRepository
+import com.bumptech.glide.Glide
 import com.google.android.material.datepicker.MaterialDatePicker.Builder.datePicker
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -58,6 +64,8 @@ class TableFragment : Fragment() {
                 dpd.show()
             }
 
+
+
         }
         time?.onItemSelectedListener = object :AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -72,7 +80,6 @@ class TableFragment : Fragment() {
             ) {
                 val type = parent?.getItemAtPosition(position).toString()
                 spinnertxt.setText(type)
-                Toast.makeText(activity, type, Toast.LENGTH_LONG).show()
                 println(type)
             }
         }

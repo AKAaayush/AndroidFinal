@@ -11,20 +11,24 @@ import org.junit.Test
 class RmsUnitTesting {
 
     private var repository= UserRepository()
+
+
     @Test
     fun checkRegisterUSer() = runBlocking {
         val user =
-            User(name = "this is test", email = "thisisemail1mdnsshf212@gmail.com",dob="465",gender = "male", phone = "hjka", password = "testing12")
+            User(name = "this is test", email = "thidscx2ssa13@gmail.com", address = "KTM", password = "admin12")
         repository = UserRepository()
-        val expectedResult = false
+        val expectedResult = true
         val response = repository.registerUSer(user)
         val actualResult = response.success!!
         Assert.assertEquals(expectedResult, actualResult)
     }
 
+
+
     @Test
     fun loginUser() = runBlocking {
-        val user = User(email = "aa@gmail.com", password = "admin12")
+        val user = User(email = "aayush@gmail.com", password = "admin12")
         repository = UserRepository()
         val expectedResult = true
         val response = repository.checkUser(user)
@@ -34,7 +38,7 @@ class RmsUnitTesting {
 
     @Test
     fun getme() = runBlocking {
-        val user = User(email = "aa@gmail.com", password = "admin12")
+        val user = User(email = "aayush@gmail.com", password = "admin12")
         repository = UserRepository()
         val expectedResult = true
         val response = repository.checkUser(user)
@@ -47,8 +51,8 @@ class RmsUnitTesting {
     }
 
     @Test
-    fun getAllNotes()= runBlocking {
-        val user = User(email = "aa@gmail.com", password = "admin12")
+    fun getAllFood()= runBlocking {
+        val user = User(email = "aayush@gmail.com", password = "admin12")
         repository = UserRepository()
         val expectedResult = true
         val response = repository.checkUser(user)
@@ -59,8 +63,8 @@ class RmsUnitTesting {
         Assert.assertEquals(expectedResult, actualResult)
     }
     @Test
-    fun getAllbookmarkedNotes()= runBlocking {
-        val user = User(email = "aa@gmail.com", password = "admin12")
+    fun getAllFoodItem()= runBlocking {
+        val user = User(email = "aayush@gmail.com", password = "admin12")
         repository = UserRepository()
         val expectedResult = true
         val response = repository.checkUser(user)

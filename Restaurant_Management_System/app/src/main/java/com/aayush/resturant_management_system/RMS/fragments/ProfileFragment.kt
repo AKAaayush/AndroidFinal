@@ -97,7 +97,7 @@ class ProfileFragment : Fragment() {
                             }
                         }
 
-                        Toast.makeText(context, "check", Toast.LENGTH_SHORT).show()
+//                        Toast.makeText(context, "check", Toast.LENGTH_SHORT).show()
 
                     }
 
@@ -144,6 +144,7 @@ class ProfileFragment : Fragment() {
                     withContext(Dispatchers.Main) {
                         startActivity(Intent(context, LoginActivity::class.java))
                     }
+
                 }
 
             }

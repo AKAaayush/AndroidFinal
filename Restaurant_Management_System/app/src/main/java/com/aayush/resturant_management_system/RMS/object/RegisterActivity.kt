@@ -17,7 +17,6 @@ import kotlinx.coroutines.withContext
 import java.util.*
 
 class RegisterActivity : AppCompatActivity() {
-//    private lateinit var textView2: TextView
     private lateinit var signup_fullname: EditText
     private lateinit var signup_address: EditText
     private lateinit var signup_email: EditText
@@ -61,7 +60,7 @@ class RegisterActivity : AppCompatActivity() {
 //    val gender = signup_gender.text.toString()
     val password=signup_password.text.toString()
     val cfpassword=signup_cfpassword.text.toString()
-        if(fullname == "" || email == "" || password == "" || cfpassword == ""){
+        if(fullname == "" || email == "" ||  phone == "" ||  address == "" || password == "" || cfpassword == ""){
             validationData()
             return
         }
@@ -116,6 +115,11 @@ class RegisterActivity : AppCompatActivity() {
 
     if (signup_phone.text.isEmpty()) {
         signup_phone.error = "Please enter Phone No"
+        return
+    }
+
+    if (signup_email.text.isEmpty()) {
+        signup_email.error = "Please enter your email"
         return
     }
 

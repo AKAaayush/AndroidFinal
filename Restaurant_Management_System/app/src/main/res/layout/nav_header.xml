@@ -7,11 +7,7 @@
     android:background="@color/edit"
 
     >
-    <!--    android:orientation="vertical"-->
-    <!--    android:gravity="bottom"-->
-    <!--    android:padding="16dp"-->
-    <!--    android:theme="@style/ThemeOverlay.AppCompat.Dark"-->
-    <!--    tools:context=".RMS.fragments.ProfileFragment"-->
+
 
 
     <TextView
