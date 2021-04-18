@@ -54,6 +54,7 @@
     <EditText
         android:id="@+id/login_email"
         android:layout_width="0dp"
+        android:singleLine="true"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="44dp"
@@ -81,6 +82,7 @@
         android:drawableStart="@drawable/ic_lock"
         android:drawablePadding="16dp"
         android:ems="10"
+        android:singleLine="true"
         android:hint="@string/password"
         android:inputType="textPassword"
         android:padding="16dp"

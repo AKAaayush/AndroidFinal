@@ -16,6 +16,7 @@ import com.aayush.resturant_management_system.RMS.api.ServiceBuilder
 import com.aayush.resturant_management_system.RMS.entity.User
 import com.aayush.resturant_management_system.RMS.repository.UserRepository
 import com.bumptech.glide.Glide
+import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -32,7 +33,7 @@ import java.util.*
 class UserProfileActivity : AppCompatActivity() {
     private val REQUEST_GALLERY_CODE = 0;
     private val REQUEST_CAMERA_CODE = 1;
-    private lateinit var imgAdd: ImageView;
+    private lateinit var imgAdd: CircleImageView;
     private lateinit var edit_name: EditText;
     private lateinit var edit_email: EditText;
     private lateinit var edit_address: EditText;

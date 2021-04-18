@@ -21,7 +21,7 @@ class MapsFragment : Fragment() {
 
         private val callback = OnMapReadyCallback { googleMap ->
             val Office = LatLng(27.7061949, 85.3300394)
-            googleMap.addMarker(MarkerOptions().position(Office).title("Our Office"))
+            googleMap.addMarker(MarkerOptions().position(Office).title(" Restaurant Location "))
             googleMap.moveCamera(CameraUpdateFactory.newLatLng(Office))
         }
 

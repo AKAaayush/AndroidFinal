@@ -87,6 +87,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
 
             when(it.itemId){
+                R.id.table ->{makeCurrentFragment(tableFragment)}
+            }
+
+            when(it.itemId){
                 R.id.Logout ->{
 
 
@@ -104,12 +108,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-//        nav_view.setNavigationItemSelectedListener {
-//            when(it. itemId){
-//                R.id.miItem1 -> Toast.makeText(applicationContext, "clicked Item 1", Toast.LENGTH_SHORT).show()
-//            }
-//
-//        }
 
 
 

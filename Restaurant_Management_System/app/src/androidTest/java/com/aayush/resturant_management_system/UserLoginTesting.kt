@@ -25,7 +25,7 @@ class UserLoginTesting {
     @Test
     fun checkLoginUI() {
         Espresso.onView(withId(R.id.login_email))
-                .perform(ViewActions.typeText("aa@gmail.com"))
+                .perform(ViewActions.typeText("test12@gmail.com"))
 
         Thread.sleep(2000)
         Espresso.closeSoftKeyboard()

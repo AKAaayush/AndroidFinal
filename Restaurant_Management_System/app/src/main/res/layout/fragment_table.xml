@@ -22,6 +22,7 @@
         tools:ignore="MissingConstraints" />
 
     <EditText
+        android:singleLine="true"
         android:id="@+id/user_email"
         android:layout_width="347dp"
         android:layout_height="wrap_content"

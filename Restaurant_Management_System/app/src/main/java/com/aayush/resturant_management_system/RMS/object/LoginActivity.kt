@@ -25,8 +25,8 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 
-class LoginActivity : AppCompatActivity() {
-//    , SensorEventListener
+class LoginActivity : AppCompatActivity()  {
+//, SensorEventListener
     private lateinit var login_email: EditText
     private lateinit var login_password: EditText
     private lateinit var btn_login: Button
@@ -69,6 +69,7 @@ class LoginActivity : AppCompatActivity() {
         }
         btnsignup.setOnClickListener() {
             startActivity(Intent(this, RegisterActivity::class.java))
+
         }
 
 
@@ -83,14 +84,24 @@ class LoginActivity : AppCompatActivity() {
 //    }
 
 //    override fun onSensorChanged(event: SensorEvent?){
-////        val values=event!!.values[1]
-////        if (values<0)
-////            startActivity(Intent(this, RegisterActivity::class.java))
-////
-////
-////        else if (values>0)
-////            Toast.makeText(this, "swap left", Toast.LENGTH_SHORT).show()
-////
+//        val values=event!!.values[1]
+//
+//        if (values<0) {
+//            Toast.makeText(this, " Right", Toast.LENGTH_SHORT).show()
+//
+//            startActivity(Intent(this, RegisterActivity::class.java))
+//            finish()
+//
+//        }
+//
+//
+//        else if (values>0) {
+//            Toast.makeText(this, " left", Toast.LENGTH_SHORT).show()
+//            startActivity(Intent(this, LoginActivity::class.java))
+//            finish()
+//
+//        }
+//
 //
 //    }
 
@@ -121,11 +132,15 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun login() {
-        validationData()
+
         val email = login_email.text.toString()
         val password = login_password.text.toString()
-        Toast.makeText(this, "$email Logged In!! ", Toast.LENGTH_LONG).show()
         val user= User(email=email,password = password)
+
+        if(email == "" || password == "" ){
+            validationData()
+            return
+        }
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val repository = UserRepository()
@@ -139,8 +154,24 @@ class LoginActivity : AppCompatActivity() {
                                     this@LoginActivity,
                                     MainActivity::class.java
                             )
+
                     )
+
+                    withContext(Dispatchers.Main) {
+                        val snack =
+                            Snackbar.make(
+                                linearlayout,
+                                "{${user.name} is successfully logged In}",
+                                Snackbar.LENGTH_LONG
+                            )
+                        snack.setAction("OK", View.OnClickListener {
+                            snack.dismiss()
+                        })
+                        snack.show()
+                    }
+
                     finish()
+
                 } else {
                     withContext(Dispatchers.Main) {
                         val snack =

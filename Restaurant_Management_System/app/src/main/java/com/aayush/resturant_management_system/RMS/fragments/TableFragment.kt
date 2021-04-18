@@ -1,15 +1,21 @@
 package com.aayush.resturant_management_system.RMS.fragments
 
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
 import com.aayush.resturant_management_system.R
+import com.aayush.resturant_management_system.RMS.`object`.UserProfileActivity
+import com.aayush.resturant_management_system.RMS.api.ServiceBuilder
 import com.aayush.resturant_management_system.RMS.entity.Table
 import com.aayush.resturant_management_system.RMS.repository.TableRepository
+import com.aayush.resturant_management_system.RMS.repository.UserRepository
+import com.bumptech.glide.Glide
 import com.google.android.material.datepicker.MaterialDatePicker.Builder.datePicker
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -27,35 +33,7 @@ class TableFragment : Fragment() {
         private lateinit var datetxt : TextView
         private lateinit var btn_table : Button
 
-//
-//      fun onCreate(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
-//        super.onCreate(savedInstanceState)
-//        val view = inflater.inflate(R.layout.fragment_table, container, false)
-//
-//        user_email = view.findViewById(R.id.user_email)
-//        time = view.findViewById(R.id.time)
-//        people = view.findViewById(R.id.people)
-//        date = view.findViewById(R.id.date)
-//          btn_table = view.findViewById(R.id.btn_table)
-//
-//          btn_table.setOnClickListener(){
-////              Toast.makeText(context, "error Booked", Toast.LENGTH_SHORT).show()
-////
-////              tablebooking()
-//              startActivity(context, TableActivity::class.java))
-//          }
-//
-//        return view
-//    }
 
-//    override fun onCreate(inflater: LayoutInflater, container: ViewGroup?,
-//                          savedInstanceState: Bundle?): View?  {
-//
-//
-//
-//        return inflater.inflate(R.layout.fragment_table, container, false)
-//
-//    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -66,15 +44,6 @@ class TableFragment : Fragment() {
         spinnertxt = view.findViewById(R.id.spinnertxt)
         datetxt = view.findViewById(R.id.datetxt)
         btn_date = view.findViewById(R.id.btn_date)
-//        val day: Int = date.getDayOfMonth()
-//        val month: Int = date.getMonth() + 1
-//        val year: Int = date.getYear()
-        //For Data of birth
-//        date = view.findViewById<DatePicker>(R.id.date)
-//        val c = Calendar.getInstance()
-//        c[2000, 11] = 31 //Year,Mounth -1,Day
-//
-//        date.setMaxDate(c.timeInMillis)
         //calender
         val c = Calendar.getInstance()
         val year = c.get(Calendar.YEAR)
@@ -95,6 +64,8 @@ class TableFragment : Fragment() {
                 dpd.show()
             }
 
+
+
         }
         time?.onItemSelectedListener = object :AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -109,7 +80,6 @@ class TableFragment : Fragment() {
             ) {
                 val type = parent?.getItemAtPosition(position).toString()
                 spinnertxt.setText(type)
-                Toast.makeText(activity, type, Toast.LENGTH_LONG).show()
                 println(type)
             }
         }
@@ -171,7 +141,7 @@ class TableFragment : Fragment() {
             return
         }
         if (people.text.isEmpty()) {
-            people.error = "Please enter People Number"
+            people.error = "Please enter Number of People"
             return
         }
 

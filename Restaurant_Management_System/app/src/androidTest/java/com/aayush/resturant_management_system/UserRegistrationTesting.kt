@@ -29,11 +29,6 @@ class UserRegistrationTesting {
         Thread.sleep(2000)
         Espresso.closeSoftKeyboard()
 
-        Espresso.onView(withId(R.id.signup_email))
-            .perform(ViewActions.typeText("test@gmail.com"))
-
-        Thread.sleep(2000)
-        Espresso.closeSoftKeyboard()
 
         Espresso.onView(withId(R.id.signup_address))
             .perform(ViewActions.typeText("KTM"))
@@ -46,6 +41,13 @@ class UserRegistrationTesting {
 
         Thread.sleep(2000)
         Espresso.closeSoftKeyboard()
+        Espresso.onView(withId(R.id.signup_email))
+            .perform(ViewActions.typeText("test12@gmail.com"))
+
+        Thread.sleep(2000)
+        Espresso.closeSoftKeyboard()
+
+
 
         Espresso.onView(withId(R.id.signup_password))
             .perform(ViewActions.typeText("admin12"))
