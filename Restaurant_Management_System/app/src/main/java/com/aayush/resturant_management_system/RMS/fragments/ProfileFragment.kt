@@ -1,17 +1,23 @@
 package com.aayush.resturant_management_system.RMS.fragments
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import com.aayush.resturant_management_system.R
+import com.aayush.resturant_management_system.RMS.`object`.LoginActivity
 import com.aayush.resturant_management_system.RMS.api.ServiceBuilder
+import com.aayush.resturant_management_system.RMS.database.Db
 import com.aayush.resturant_management_system.RMS.entity.User
 import com.aayush.resturant_management_system.RMS.repository.UserRepository
 import com.bumptech.glide.Glide
@@ -25,28 +31,37 @@ import java.lang.Exception
 
 class ProfileFragment : Fragment() {
     //binding
-    private  lateinit var  profile : TextView
-    private lateinit var  profilename : TextView
+    private lateinit var profile: TextView
+    private lateinit var profilename: TextView
+    private lateinit var btn_logout: Button
 
 
-    private lateinit var  email : TextView
-    private lateinit var  image : CircleImageView
+    private lateinit var email: TextView
+    private lateinit var image1: CircleImageView
 //    private lateinit var  welcome : TextView
 
-
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
+
+        return view;
+
+//        profileview()
+
+
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         profile = view.findViewById(R.id.profile)
         profilename = view.findViewById(R.id.profilename)
-
         email = view.findViewById(R.id.profile_email)
 //        welcome = view.findViewById(R.id.welcome)
-
-        image = view.findViewById(R.id.circleImageView)
-
+        image1 = view.findViewById(R.id.circleImageView)
+        btn_logout = view.findViewById(R.id.btn_logout)
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
@@ -55,9 +70,12 @@ class ProfileFragment : Fragment() {
 
                 if (response.success == true) {
                     val data = response.data
-                    Log.d("Data is: ", response.data!!.toString())
+//                    val d = data?.get(0)
+                    Log.d("data is " ,response.data!!.toString())
+//                    Log.d("Data is: ", response.data.toString())
                     val name = "${data!!.name}  "
                     val p_email = "${data!!.email}"
+                    val image = "${data!!.image}"
 
 
                     withContext(Dispatchers.Main) {
@@ -65,6 +83,14 @@ class ProfileFragment : Fragment() {
                         email.text = p_email
 //                        welcome.text = name
 
+                        val imagepath = ServiceBuilder.loadImagepath() +image
+                        if(image != null){
+                        if(!image.equals("noimg")!!){
+                            Glide.with(requireActivity())
+                                .load(imagepath)
+                                .into((image1))
+                        }
+                    }
 
                         Toast.makeText(context, "check", Toast.LENGTH_SHORT).show()
 
@@ -78,22 +104,13 @@ class ProfileFragment : Fragment() {
                 }
 
             } catch (e: Exception) {
-                Log.d("25A:",e.localizedMessage)
+                Log.d("25A:", e.localizedMessage)
                 withContext(Dispatchers.Main) {
                     Toast.makeText(context, "Here", Toast.LENGTH_SHORT).show()
                 }
             }
 
-
         }
-
-        return view;
-
-//        profileview()
-
-
-
-    }
 
 
 //  private fun profileview(){
@@ -120,7 +137,36 @@ class ProfileFragment : Fragment() {
 //
 //
 //  }
+        btn_logout.setOnClickListener {
+//            loadFragment(fragment)
+
+            val builder = AlertDialog.Builder(requireContext())
+            builder.setMessage("DO you Want to logout")
+            builder.setIcon(android.R.drawable.ic_dialog_alert)
+            builder.setPositiveButton("yes"){dialogInterface, which->
+                val sharePref = requireActivity().getSharedPreferences("MyPref", AppCompatActivity.MODE_PRIVATE )
+                val editor = sharePref.edit()
+                editor.remove("email")
+                editor.remove("password")
+                editor.remove("_id")
+                editor.remove("name")
+                    .apply()
+
+                CoroutineScope(Dispatchers.IO).launch{
+                    Db.getInstance(requireContext()).getUserDao().logout()
+                    withContext(Dispatchers.Main){
+                        startActivity(Intent(context, LoginActivity::class.java))
+                    }
+                }
+            }
+            builder.setNegativeButton("No"){
+                    dialogInterface, which ->
+            }
+            builder.show()
+        }
+
     }
+}
 
 
 

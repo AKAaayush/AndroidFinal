@@ -47,9 +47,9 @@ class AddToCartAdapter (val listpost:ArrayList<ForAddItem>,
 
     override fun onBindViewHolder(holder: FavviewHolder, position: Int) {
         val fav = listpost[position]
-        holder.foodname.text="Area:"+fav.food_name
-        holder.foodprice.text="price:"+fav.food_price
-        holder.foodd.text="location:"+fav.food_desc
+        holder.foodname.text=fav.food_name
+        holder.foodprice.text=fav.food_price
+        holder.foodd.text=fav.food_desc
 
         val imagePath = ServiceBuilder.loadImagepath() + fav.food_image
         if (!fav.food_image.equals("noimg")) {
@@ -67,6 +67,7 @@ class AddToCartAdapter (val listpost:ArrayList<ForAddItem>,
                     val repository=AddToCartRepository()
                     val response=repository.deleteFavProduct(fav._id!!)
                     if(response.success==true){
+                        
                         withContext(Dispatchers.Main){
                             listpost.removeAt(position)
                             notifyDataSetChanged()

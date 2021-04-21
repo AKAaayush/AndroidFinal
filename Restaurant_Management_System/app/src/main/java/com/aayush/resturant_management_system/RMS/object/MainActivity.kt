@@ -7,7 +7,9 @@ import android.view.MenuItem
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
@@ -80,6 +82,17 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             when(it.itemId){
                 R.id.maps ->{makeCurrentFragment(mapsFragment)}
             }
+            when(it.itemId){
+                R.id.profile ->{makeCurrentFragment(profileFragment)}
+            }
+
+            when(it.itemId){
+                R.id.Logout ->{
+
+
+
+                }
+            }
 
 
             true
@@ -111,7 +124,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     private fun makeCurrentFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction().apply {
-            replace(R.id.fragmentContainer, fragment)
+            replace(R.id.fragmentContainer1, fragment)
             setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
             commit()
         }
