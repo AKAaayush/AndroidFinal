@@ -15,7 +15,7 @@
         />
     <item
     android:id="@+id/Fav"
-    android:icon="@drawable/restaurant_menu"
+    android:icon="@drawable/favorite"
     android:title="Fav"
     />
 

@@ -108,10 +108,6 @@ class HomeFragment : Fragment() {
         }
 
 
-
-
-
-//
         getFoodData()
 
         return view;
@@ -129,13 +125,11 @@ class HomeFragment : Fragment() {
                         val fooditemlist = response.data
                         FoodItemDatabase.getInstance(requireContext()).getFoodItemDAO().deleteFoodItem()
                         FoodItemDatabase.getInstance(requireContext()).getFoodItemDAO().insertfoodItem(response.data)
-//                        Toast.makeText(context, "$fooditemlist", Toast.LENGTH_SHORT).show()
                         val adapter = FoodItemAdapter(
                                 fooditemlist as ArrayList<FoodItem>,
                                 requireContext()
                         )
-//                        val alllist= Db.getInstance(requireContext()).getFoodItemDAO().getproduct()
-//                        val adpater= context?.let { HomeAdapter(alllist as ArrayList<FoodItem>, it) }
+
                         fooditemrecycler.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
                         fooditemrecycler.adapter = adapter
                     }
@@ -159,22 +153,5 @@ class HomeFragment : Fragment() {
 
 
 
-//     fun loadvlaue(){
-//        CoroutineScope(Dispatchers.IO).launch{
-//            val repositrory=FoodItemRepository()
-//            val response=repositrory.getFoodItemApiData()
-//            if(response.success==true){
-//                val list=response.data
-//                Db.getInstance(requireContext()).getFoodItemDAO().dropTable()
-//                Db.getInstance(requireContext()).getFoodItemDAO().AddProdcut(list)
-//                val alllist=FoodItemDatabase.getInstance(requireContext()).getFoodItemDAO().getproduct()
-//                withContext(Dispatchers.Main){
-//                    val adpater= context?.let { HomeAdapter(alllist as ArrayList<FoodItem>, it) }
-//                    fooditemrecycler.setHasFixedSize(true);
-//                    fooditemrecycler.layoutManager =LinearLayoutManager(activity)
-//                    fooditemrecycler.adapter=adpater;
-//                }
-//            }
-//        }
-//    }
+
 }

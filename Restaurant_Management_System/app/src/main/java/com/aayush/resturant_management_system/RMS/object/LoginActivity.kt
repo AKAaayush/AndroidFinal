@@ -2,6 +2,10 @@ package com.aayush.resturant_management_system.RMS.`object`
 
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -21,12 +25,16 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 
-class LoginActivity : AppCompatActivity() {
+class LoginActivity : AppCompatActivity()  {
+//, SensorEventListener
     private lateinit var login_email: EditText
     private lateinit var login_password: EditText
     private lateinit var btn_login: Button
     private lateinit var btnsignup: Button
     private lateinit var linearlayout: ConstraintLayout
+
+//    private lateinit var sensorManager: SensorManager
+//    private var sensor:Sensor?=null
 
     private val permissions = arrayOf(
             android.Manifest.permission.CAMERA,
@@ -44,19 +52,58 @@ class LoginActivity : AppCompatActivity() {
         btn_login = findViewById(R.id.btn_login)
         linearlayout = findViewById(R.id.linearlayout)
 
+
+
+//        sensorManager= getSystemService(SENSOR_SERVICE) as SensorManager
+//
+//        if(!checkSensor())
+//            return
+//        else{
+//            sensor= sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE)
+//            sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL  )
+//        }
+
         checkRunTimePermission()
         btn_login.setOnClickListener {
             login()
         }
-
-
-//open signup activity
         btnsignup.setOnClickListener() {
             startActivity(Intent(this, RegisterActivity::class.java))
+
         }
 
 
     }
+
+//    private fun checkSensor(): Boolean {
+//        var flag=true
+//        if(sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE)==null){
+//            flag= false
+//        }
+//        return flag
+//    }
+
+//    override fun onSensorChanged(event: SensorEvent?){
+//        val values=event!!.values[1]
+//
+//        if (values<0) {
+//            Toast.makeText(this, " Right", Toast.LENGTH_SHORT).show()
+//
+//            startActivity(Intent(this, RegisterActivity::class.java))
+//            finish()
+//
+//        }
+//
+//
+//        else if (values>0) {
+//            Toast.makeText(this, " left", Toast.LENGTH_SHORT).show()
+//            startActivity(Intent(this, LoginActivity::class.java))
+//            finish()
+//
+//        }
+//
+//
+//    }
 
 
     private fun checkRunTimePermission() {
@@ -85,10 +132,15 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun login() {
+
         val email = login_email.text.toString()
         val password = login_password.text.toString()
-        Toast.makeText(this, "$email Logged In!! ", Toast.LENGTH_LONG).show()
         val user= User(email=email,password = password)
+
+        if(email == "" || password == "" ){
+            validationData()
+            return
+        }
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val repository = UserRepository()
@@ -102,8 +154,24 @@ class LoginActivity : AppCompatActivity() {
                                     this@LoginActivity,
                                     MainActivity::class.java
                             )
+
                     )
+
+                    withContext(Dispatchers.Main) {
+                        val snack =
+                            Snackbar.make(
+                                linearlayout,
+                                "{${user.name} is successfully logged In}",
+                                Snackbar.LENGTH_LONG
+                            )
+                        snack.setAction("OK", View.OnClickListener {
+                            snack.dismiss()
+                        })
+                        snack.show()
+                    }
+
                     finish()
+
                 } else {
                     withContext(Dispatchers.Main) {
                         val snack =
@@ -129,4 +197,28 @@ class LoginActivity : AppCompatActivity() {
             }
         }
     }
+
+//    override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
+//
+//    }
+
+//    Validation
+private fun validationData() {
+    if (login_email.text.isEmpty()) {
+        login_email.error = "Please enter Email"
+        return
+    }
+
+    if (login_password.text.isEmpty()) {
+        login_password.error = "Please enter Password"
+        return
+    }
+
+
+}
+
+
+
+
+
 }

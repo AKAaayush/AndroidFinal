@@ -2,11 +2,14 @@ package com.aayush.resturant_management_system.RMS.adapter
 
 import android.app.AlertDialog
 import android.content.Context
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.aayush.resturant_management_system.R
 import com.aayush.resturant_management_system.RMS.api.ServiceBuilder
@@ -67,7 +70,7 @@ class AddToCartAdapter (val listpost:ArrayList<ForAddItem>,
                     val repository=AddToCartRepository()
                     val response=repository.deleteFavProduct(fav._id!!)
                     if(response.success==true){
-                        
+                        deletenotification()
                         withContext(Dispatchers.Main){
                             listpost.removeAt(position)
                             notifyDataSetChanged()
@@ -87,6 +90,21 @@ class AddToCartAdapter (val listpost:ArrayList<ForAddItem>,
             builder.show()
         }
     }
+
+    private fun deletenotification() {
+
+        val notificationManager= NotificationManagerCompat.from(context)
+        val notificationChannels= NotificationChannels(context)
+        notificationChannels.createNotificationChannels()
+        val notification= NotificationCompat.Builder(context, notificationChannels.CHANNEL_1)
+            .setSmallIcon(R.drawable.logo)
+            .setContentTitle("Favorite Deleted")
+            .setContentText("Food Item Deleted from favorites successfully.")
+            .setColor(Color.YELLOW)
+            .build()
+        notificationManager.notify(1, notification)
+    }
+
     override fun getItemCount(): Int {
         return listpost.size
     }

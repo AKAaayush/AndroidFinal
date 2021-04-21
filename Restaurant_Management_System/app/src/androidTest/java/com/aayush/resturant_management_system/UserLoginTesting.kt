@@ -23,16 +23,16 @@ class UserLoginTesting {
     val testRule = ActivityScenarioRule(LoginActivity::class.java)
 
     @Test
-    fun checkArithmeticUI() {
+    fun checkLoginUI() {
         Espresso.onView(withId(R.id.login_email))
-                .perform(ViewActions.typeText("aayush@gmail.com"))
+                .perform(ViewActions.typeText("test12@gmail.com"))
 
         Thread.sleep(2000)
         Espresso.closeSoftKeyboard()
 
 
         Espresso.onView(withId(R.id.login_password))
-                .perform(ViewActions.typeText("admin"))
+                .perform(ViewActions.typeText("admin12"))
 
         Thread.sleep(2000)
         Espresso.closeSoftKeyboard()
@@ -40,7 +40,8 @@ class UserLoginTesting {
         Espresso.onView(withId(R.id.btn_login))
                 .perform(ViewActions.click())
 
-        Espresso.onView(withId(R.id.textView4))
+        Thread.sleep(2000)
+        Espresso.onView(withId(R.id.fragmentContainer))
                 .check(matches(isDisplayed()))
 
     }

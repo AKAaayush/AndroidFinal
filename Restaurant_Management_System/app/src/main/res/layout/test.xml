@@ -16,11 +16,11 @@
         android:id="@+id/imageView"
         android:layout_width="112dp"
         android:layout_height="116dp"
-        android:layout_marginStart="4dp"
+        android:layout_marginStart="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.511" />
+        app:layout_constraintVertical_bias="0.47" />
 
     <TextView
         android:id="@+id/mname"
@@ -80,11 +80,12 @@
         android:id="@+id/all_menu_delivery_charge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="4dp"
         android:text="Free Delivery"
         app:layout_constraintBottom_toBottomOf="@+id/all_menu_deliverytime"
         app:layout_constraintStart_toEndOf="@+id/all_menu_deliverytime"
-        app:layout_constraintTop_toTopOf="@+id/all_menu_deliverytime" />
+        app:layout_constraintTop_toTopOf="@+id/all_menu_deliverytime"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/foodprice"

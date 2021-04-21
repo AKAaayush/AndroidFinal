@@ -2,6 +2,7 @@ package com.aayush.resturant_management_system.RMS.adapter
 
 import android.app.AlertDialog
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,7 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.aayush.resturant_management_system.R
+import com.aayush.resturant_management_system.RMS.`object`.FoodDetailsActivity
 import com.aayush.resturant_management_system.RMS.api.ServiceBuilder
 import com.aayush.resturant_management_system.RMS.entity.AddCart
 import com.aayush.resturant_management_system.RMS.entity.FoodItem
@@ -36,10 +38,6 @@ class FoodItemAdapter(
         val addfav : ImageView
 
 
-//        val fname : TextView
-//        val fprice : TextView
-//        val fdesc : TextView
-//        val fimage : ImageView
 
         init {
              fooditemname = view.findViewById(R.id.fooditemname)
@@ -47,11 +45,6 @@ class FoodItemAdapter(
              fooditemdesc = view.findViewById(R.id.fooditemdesc)
              fooditemimage = view.findViewById(R.id.fooditemimage)
             addfav = view.findViewById(R.id.addfav)
-
-//             fname = view.findViewById(R.id.fname)
-//             fprice = view.findViewById(R.id.fprice)
-//             fdesc = view.findViewById(R.id.fdesc)
-//             fimage = view.findViewById(R.id.fimage)
 
 
         }
@@ -78,15 +71,10 @@ class FoodItemAdapter(
                 .into(holder.fooditemimage)
         }
 
-//        holder.fooditemimage.setOnClickListener {
-//            val intent = Intent(context, FoodDetailsActivity::class.java)
-//            intent.putExtra("foodItem",listitem)
-//            context.startActivity(intent)
-//    }
 
         holder.addfav.setOnClickListener {
             val builder = AlertDialog.Builder(context);
-            builder.setMessage("Do you want add this product to Fav.")
+            builder.setMessage("Do you want add this Food to Fav.")
             builder.setIcon(android.R.drawable.ic_dialog_alert);
             builder.setPositiveButton("Yes") { dialogInterface, which ->
                 CoroutineScope(Dispatchers.IO).launch {

@@ -14,7 +14,7 @@ interface FoodItemApi {
 
     ): Response<FoodItemResponse>
 
-    @GET("food/single/{id}")
+    @GET("api/food/single/{id}")
     suspend fun getallProduct(
         @Header("Authorization") token: String,
         @Path("id") userId:String
