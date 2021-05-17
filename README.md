@@ -18,8 +18,7 @@ This application helps the user to view available food/meal, table booking, and 
 * RESTful API
 * Intregration of Room database
 
-# Youtube Link
-https://youtu.be/6s0rgmsrZZM
+
 
 # Back-End Api Link
 https://github.com/softwarica-github/t2---backend-api-AKAaayush
